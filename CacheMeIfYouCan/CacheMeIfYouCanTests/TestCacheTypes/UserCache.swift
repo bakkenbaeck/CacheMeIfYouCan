@@ -1,5 +1,5 @@
 //
-//  User.swift
+//  UserCache.swift
 //  CacheMeIfYouCanTests
 //
 //  Created by Ellen Shapiro on 12/11/18.

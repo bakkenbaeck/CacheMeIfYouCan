@@ -8,6 +8,10 @@
 
 import Foundation
 
+public enum DataConvertibleError: Error {
+    case didNotConvertDataToExpectedType
+}
+
 public protocol DataConvertible {
     
     var toData: Data? { get }

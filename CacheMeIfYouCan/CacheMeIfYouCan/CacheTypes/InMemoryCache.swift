@@ -19,6 +19,10 @@ open class InMemoryCache<ValueType: AnyObject>: Cache {
         return cache
     }()
     
+    public init() {
+        // Necessary to allow subclasses to initialize
+    }
+    
     private func key(for url: URL) -> NSString {
         return url.absoluteString as NSString
     }

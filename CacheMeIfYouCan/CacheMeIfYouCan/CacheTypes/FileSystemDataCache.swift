@@ -62,16 +62,29 @@ open class FileSystemDataCache<T: DataConvertible>: Cache {
         try FileManagerHelper.removeFile(at: localURL)
     }
     
-    
+    /// Gets the item from the cache, or if it's not present in the cache, tries to download it from the given URL
+    ///
+    /// - Parameters:
+    ///   - url: The URL to try and find an item for
+    ///   - downloadHeaders: Any download headers to add to the download request (for example, Auth headers).
+    ///                      Defaults to an empty dictionary.
+    ///   - queue: The queue to call back on. Defaults to the main queue.
+    ///   - failureCompletion: The completion closure to execute on failure.
+    ///                        Param: - Any error which was encountered trying to download. If an error is encountered
+    ///                                 trying to read, download will be tried automatically.
+    ///   - successCompletion: The completion closure to execute on success.
+    ///                        Params:
+    ///                           - The retrieved item
+    ///                           - The URL for which it was retrieved, in case something's been recycled.
     public func fetchOrDownloadItem(for url: URL,
                                     downloadHeaders: [String: String] = [:],
                                     callbackOn queue: DispatchQueue = .main,
-                                    failureCompletion: @escaping (Error?) -> Void,
-                                    successCompletion: @escaping (StoredType) -> Void) {
+                                    failureCompletion: @escaping (Error) -> Void,
+                                    successCompletion: @escaping (StoredType, URL) -> Void) {
         self.fetchItem(for: url, callbackOn: self.localQueue) { item in
             if let item = item {
                 queue.async {
-                    successCompletion(item)
+                    successCompletion(item, url)
                 }
                 
                 return
@@ -89,7 +102,7 @@ open class FileSystemDataCache<T: DataConvertible>: Cache {
                 successCompletion: { [weak self] data in
                     guard let item = T(data: data) else {
                         queue.async {
-                            failureCompletion(nil)
+                            failureCompletion(DataConvertibleError.didNotConvertDataToExpectedType)
                         }
                         return
                     }
@@ -97,7 +110,7 @@ open class FileSystemDataCache<T: DataConvertible>: Cache {
                     guard let self = self else {
                         // Just give back the item, don't try to store it.
                         queue.async {
-                            successCompletion(item)
+                            successCompletion(item, url)
                         }
                         
                         return
@@ -106,7 +119,7 @@ open class FileSystemDataCache<T: DataConvertible>: Cache {
                     // Store it before giving it back
                     self.store(item: item, for: url, callbackOn: self.localQueue) {
                         queue.async {
-                            successCompletion(item)
+                            successCompletion(item, url)
                         }
                     }
                 })

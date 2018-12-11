@@ -11,7 +11,6 @@ import XCTest
 
 class ImageCacheTests: XCTestCase {
     
-    let homerURL = URL(string: "https://raw.githubusercontent.com/bakkenbaeck/CacheMeIfYouCan/master/CacheMeIfYouCan/CacheMeIfYouCanTests/TestImages/homer.png")!
     
     override func setUp() {
         super.setUp()
@@ -40,11 +39,16 @@ class ImageCacheTests: XCTestCase {
                               file: file,
                               line: line)
                 XCTFail("Could not fetch or download item. Error: \(String(describing: error))",
-                    file: file,
-                    line: line)
+                        file: file,
+                        line: line)
                 expectation.fulfill()
             },
-            successCompletion: { fetchedImage in
+            successCompletion: { fetchedImage, fetchedURL in
+                XCTAssertEqual(fetchedURL,
+                               url,
+                               "Fetched url was \(fetchedURL) but handed in url was \(url)",
+                               file: file,
+                               line: line)
                 XCTAssertTrue(Thread.isMainThread,
                               "Should call back on main thread by default!",
                               file: file,
@@ -79,22 +83,6 @@ class ImageCacheTests: XCTestCase {
         return image
     }
     
-    private func localTestImage(named imageName: String,
-                                file: StaticString = #file,
-                                line: UInt = #line) -> UIImage? {
-        guard
-            let localPath = Bundle(for: ImageCacheTests.self).path(forResource: imageName, ofType: "png", inDirectory: "TestImages"),
-            let localData = try? Data(contentsOf: URL(fileURLWithPath: localPath)),
-            let localImage = UIImage(data: localData) else {
-                XCTFail("Could not get local \(imageName) image!",
-                        file: file,
-                        line: line)
-                return nil
-        }
-        
-        return localImage
-    }
-    
     func testDownloadOrCache() {
         let cachesImagesPath = FilesystemPathHelper.pathInCachesToFolder(named: "images")
         let url = URL(fileURLWithPath: cachesImagesPath)
@@ -105,22 +93,23 @@ class ImageCacheTests: XCTestCase {
         
         let cache = ImageCache(folderURL: url)
         
+        let homerURL = TestImageLoader.TestImage.homer.remoteURL
         // Are we starting with nothing in the cache?
-        XCTAssertNil(self.fetchFromCache(for: self.homerURL, using: cache))
+        XCTAssertNil(self.fetchFromCache(for: homerURL, using: cache))
 
-        guard let remoteHomer = self.downloadOrCache(for: self.homerURL, using: cache) else {
+        guard let remoteHomer = self.downloadOrCache(for: homerURL, using: cache) else {
             XCTFail("Could not get remote Homer image!")
             return
         }
         
         // Is the image we downloaded identical?
-        let localHomer = self.localTestImage(named: "homer")
+        let localHomer = TestImageLoader.localTestImage(named: "homer")
         XCTAssertEqual(remoteHomer.pngData(), localHomer?.pngData())
         
         // Is the image stored where we think it should be?
         XCTAssertTrue(FileManagerHelper.fileExists(at: expectedHomerPath))
         
-        guard let cachedHomer = self.fetchFromCache(for: self.homerURL, using: cache) else {
+        guard let cachedHomer = self.fetchFromCache(for: homerURL, using: cache) else {
             XCTFail("You are now a member of the No Homers Club.")
             return
         }
@@ -128,5 +117,14 @@ class ImageCacheTests: XCTestCase {
         // Is the image actually the same everywhere?
         XCTAssertEqual(cachedHomer.pngData(), remoteHomer.pngData())
         XCTAssertEqual(cachedHomer.pngData(), localHomer?.pngData())
+        
+        guard let redownloadedOrCachedHomer = self.downloadOrCache(for: homerURL, using: cache) else {
+            XCTFail("Couldn't get homer on second call to download or cache!")
+            return
+        }
+        
+        XCTAssertEqual(redownloadedOrCachedHomer.pngData(), cachedHomer.pngData())
+        XCTAssertEqual(redownloadedOrCachedHomer.pngData(), remoteHomer.pngData())
+        XCTAssertEqual(redownloadedOrCachedHomer.pngData(), localHomer?.pngData())
     }
 }
