@@ -20,6 +20,7 @@
 		9B57956321BF0C1A00B9EF8B /* FileSystemDataCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57956221BF0C1A00B9EF8B /* FileSystemDataCache.swift */; };
 		9B57956521BF0C4700B9EF8B /* FilesystemPathHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57956421BF0C4700B9EF8B /* FilesystemPathHelper.swift */; };
 		9B57956721BF0C9E00B9EF8B /* DataConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57956621BF0C9E00B9EF8B /* DataConvertible.swift */; };
+		9B57956921BFBABF00B9EF8B /* InMemoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57956821BFBABF00B9EF8B /* InMemoryCache.swift */; };
 		9B57956E21BFBD6A00B9EF8B /* DataConvertibleCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57956D21BFBD6A00B9EF8B /* DataConvertibleCodable.swift */; };
 		9B57957321BFBEFD00B9EF8B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57957221BFBEFD00B9EF8B /* User.swift */; };
 		9B57957721BFCE0900B9EF8B /* FileSystemDataCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57957621BFCE0900B9EF8B /* FileSystemDataCacheTests.swift */; };
@@ -80,6 +81,7 @@
 		9B57956221BF0C1A00B9EF8B /* FileSystemDataCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemDataCache.swift; sourceTree = "<group>"; };
 		9B57956421BF0C4700B9EF8B /* FilesystemPathHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesystemPathHelper.swift; sourceTree = "<group>"; };
 		9B57956621BF0C9E00B9EF8B /* DataConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataConvertible.swift; sourceTree = "<group>"; };
+		9B57956821BFBABF00B9EF8B /* InMemoryCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryCache.swift; sourceTree = "<group>"; };
 		9B57956D21BFBD6A00B9EF8B /* DataConvertibleCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataConvertibleCodable.swift; sourceTree = "<group>"; };
 		9B57957221BFBEFD00B9EF8B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9B57957621BFCE0900B9EF8B /* FileSystemDataCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemDataCacheTests.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				9B57956021BF019900B9EF8B /* Cache.swift */,
+				9B57956821BFBABF00B9EF8B /* InMemoryCache.swift */,
 				9B57956221BF0C1A00B9EF8B /* FileSystemDataCache.swift */,
 				9B57957E21BFF40300B9EF8B /* ImageCache.swift */,
 			);
@@ -385,6 +388,7 @@
 				9B57957F21BFF40300B9EF8B /* ImageCache.swift in Sources */,
 				9B57957921BFD0E700B9EF8B /* FileManagerHelper.swift in Sources */,
 				9B57957B21BFECD900B9EF8B /* LogHelper.swift in Sources */,
+				9B57956921BFBABF00B9EF8B /* InMemoryCache.swift in Sources */,
 				9B57956521BF0C4700B9EF8B /* FilesystemPathHelper.swift in Sources */,
 				9B57956721BF0C9E00B9EF8B /* DataConvertible.swift in Sources */,
 			);
