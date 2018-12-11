@@ -43,6 +43,9 @@ open class FileSystemDataCache<T: DataConvertible>: Cache {
     
     open func actuallyFetchItem(for url: URL) throws -> T? {
         let url = self.localURL(for: url)
+        guard FileManagerHelper.fileExists(at: url) else {
+            return nil
+        }
     
         let data = try Data(contentsOf: url)
         let item = T(data: data)
@@ -62,7 +65,7 @@ open class FileSystemDataCache<T: DataConvertible>: Cache {
     
     public func fetchOrDownloadItem(for url: URL,
                                     downloadHeaders: [String: String] = [:],
-                                    callbackOn queue: DispatchQueue,
+                                    callbackOn queue: DispatchQueue = .main,
                                     failureCompletion: @escaping (Error?) -> Void,
                                     successCompletion: @escaping (StoredType) -> Void) {
         self.fetchItem(for: url, callbackOn: self.localQueue) { item in
@@ -91,10 +94,20 @@ open class FileSystemDataCache<T: DataConvertible>: Cache {
                         return
                     }
                     
-                    self?.store(item: item, for: url)
+                    guard let self = self else {
+                        // Just give back the item, don't try to store it.
+                        queue.async {
+                            successCompletion(item)
+                        }
+                        
+                        return
+                    }
                     
-                    queue.async {
-                        successCompletion(item)
+                    // Store it before giving it back
+                    self.store(item: item, for: url, callbackOn: self.localQueue) {
+                        queue.async {
+                            successCompletion(item)
+                        }
                     }
                 })
         }
