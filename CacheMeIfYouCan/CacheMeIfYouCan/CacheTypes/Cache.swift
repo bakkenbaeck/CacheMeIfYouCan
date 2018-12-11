@@ -38,6 +38,13 @@ public protocol Cache: class {
 
 public extension Cache {
     
+    public static var defaultQueue: DispatchQueue {
+        return DispatchQueue(
+            label: String(describing: Self.self),
+            qos: .userInitiated,
+            attributes: [])
+    }
+    
     /// Stores an item using the local queue
     ///
     /// - Parameters:

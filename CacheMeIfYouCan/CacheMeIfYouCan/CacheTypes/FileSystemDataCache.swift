@@ -14,10 +14,7 @@ open class FileSystemDataCache<T: DataConvertible>: Cache {
     
     let folderURL: URL
     
-    public lazy var localQueue = DispatchQueue(
-        label: String(describing: self),
-        qos: .userInitiated,
-        attributes: [])
+    public lazy var localQueue = FileSystemDataCache.defaultQueue
     
     public init(folderURL: URL) {
         self.folderURL = folderURL

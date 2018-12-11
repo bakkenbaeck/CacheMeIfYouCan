@@ -66,15 +66,6 @@ public struct FileManagerHelper {
         }
     }
     
-    public static func removeFolder(at url: URL) throws {
-        guard self.folderExists(at: url) else {
-            // Nothing to remove
-            return
-        }
-        
-        try self.fileManager.removeItem(at: url)
-    }
-    
     public static func removeFile(at url: URL) throws {
         guard self.fileExists(at: url) else {
             return
