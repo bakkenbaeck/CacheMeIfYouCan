@@ -12,5 +12,5 @@ public protocol DataConvertible {
     
     var toData: Data? { get }
     
-    init?(data: Data)
+    static func from(data: Data) -> Self?
 }

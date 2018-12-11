@@ -33,4 +33,12 @@ public struct FilesystemPathHelper {
     public static func path(byAppending component: String, to existingPath: String) -> String {
         return (existingPath as NSString).appendingPathComponent(component)
     }
+    
+    public static func pathInCachesToFolder(named folderName: String) -> String {
+        return self.path(byAppending: folderName, to: self.cachesPath)
+    }
+    
+    public static func pathInDocumentsToFolder(named folderName: String) -> String {
+        return self.path(byAppending: folderName, to: self.documentsPath)
+    }
 }

@@ -12,7 +12,6 @@
 		9B57953221BF00B900B9EF8B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B57953021BF00B900B9EF8B /* Main.storyboard */; };
 		9B57953421BF00BA00B9EF8B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B57953321BF00BA00B9EF8B /* Assets.xcassets */; };
 		9B57953721BF00BA00B9EF8B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B57953521BF00BA00B9EF8B /* LaunchScreen.storyboard */; };
-		9B57954221BF00BA00B9EF8B /* CacheMeIfYouCanTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57954121BF00BA00B9EF8B /* CacheMeIfYouCanTests.swift */; };
 		9B57958721C0019E00B9EF8B /* TestImages in Resources */ = {isa = PBXBuildFile; fileRef = 9B57958621C0019E00B9EF8B /* TestImages */; };
 		9B57955521BF015900B9EF8B /* CacheMeIfYouCan.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B57955321BF015900B9EF8B /* CacheMeIfYouCan.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9B57955821BF015900B9EF8B /* CacheMeIfYouCan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B57955121BF015900B9EF8B /* CacheMeIfYouCan.framework */; };
@@ -21,6 +20,8 @@
 		9B57956321BF0C1A00B9EF8B /* FilesystemDataCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57956221BF0C1A00B9EF8B /* FilesystemDataCache.swift */; };
 		9B57956521BF0C4700B9EF8B /* FilesystemPathHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57956421BF0C4700B9EF8B /* FilesystemPathHelper.swift */; };
 		9B57956721BF0C9E00B9EF8B /* DataConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57956621BF0C9E00B9EF8B /* DataConvertible.swift */; };
+		9B57957B21BFECD900B9EF8B /* LogHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57957A21BFECD900B9EF8B /* LogHelper.swift */; };
+		9B57957D21BFEEAD00B9EF8B /* LogHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57957C21BFEEAD00B9EF8B /* LogHelperTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,7 +64,6 @@
 		9B57953621BF00BA00B9EF8B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9B57953821BF00BA00B9EF8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B57953D21BF00BA00B9EF8B /* CacheMeIfYouCanTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CacheMeIfYouCanTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9B57954121BF00BA00B9EF8B /* CacheMeIfYouCanTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheMeIfYouCanTests.swift; sourceTree = "<group>"; };
 		9B57954321BF00BA00B9EF8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B57958621C0019E00B9EF8B /* TestImages */ = {isa = PBXFileReference; lastKnownFileType = folder; path = TestImages; sourceTree = "<group>"; };
 		9B57955121BF015900B9EF8B /* CacheMeIfYouCan.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CacheMeIfYouCan.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,7 +73,8 @@
 		9B57956221BF0C1A00B9EF8B /* FilesystemDataCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesystemDataCache.swift; sourceTree = "<group>"; };
 		9B57956421BF0C4700B9EF8B /* FilesystemPathHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesystemPathHelper.swift; sourceTree = "<group>"; };
 		9B57956621BF0C9E00B9EF8B /* DataConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataConvertible.swift; sourceTree = "<group>"; };
->>>>>>> move demo stuff to demo app and create beginnings of cache lib
+		9B57957A21BFECD900B9EF8B /* LogHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogHelper.swift; sourceTree = "<group>"; };
+		9B57957C21BFEEAD00B9EF8B /* LogHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogHelperTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,8 +140,8 @@
 			isa = PBXGroup;
 			children = (
 				9B57958621C0019E00B9EF8B /* TestImages */,
-				9B57954121BF00BA00B9EF8B /* CacheMeIfYouCanTests.swift */,
 				9B57954321BF00BA00B9EF8B /* Info.plist */,
+				9B57957C21BFEEAD00B9EF8B /* LogHelperTests.swift */,
 			);
 			path = CacheMeIfYouCanTests;
 			sourceTree = "<group>";
@@ -150,12 +151,39 @@
 			children = (
 				9B57955321BF015900B9EF8B /* CacheMeIfYouCan.h */,
 				9B57955421BF015900B9EF8B /* Info.plist */,
-				9B57956021BF019900B9EF8B /* Cache.swift */,
-				9B57956621BF0C9E00B9EF8B /* DataConvertible.swift */,
-				9B57956221BF0C1A00B9EF8B /* FilesystemDataCache.swift */,
-				9B57956421BF0C4700B9EF8B /* FilesystemPathHelper.swift */,
+				9B57956A21BFBCBB00B9EF8B /* CacheTypes */,
+				9B57956B21BFBCDA00B9EF8B /* Protocols */,
+				9B57956C21BFBCE700B9EF8B /* Helpers */,
 			);
 			path = CacheMeIfYouCan;
+			sourceTree = "<group>";
+		};
+		9B57956A21BFBCBB00B9EF8B /* CacheTypes */ = {
+			isa = PBXGroup;
+			children = (
+				9B57956021BF019900B9EF8B /* Cache.swift */,
+			);
+			path = CacheTypes;
+			sourceTree = "<group>";
+		};
+		9B57956B21BFBCDA00B9EF8B /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				9B57956621BF0C9E00B9EF8B /* DataConvertible.swift */,
+				9B57956221BF0C1A00B9EF8B /* FilesystemDataCache.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		9B57956C21BFBCE700B9EF8B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				9B57956421BF0C4700B9EF8B /* FilesystemPathHelper.swift */,
+				9B57957A21BFECD900B9EF8B /* LogHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -312,7 +340,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B57954221BF00BA00B9EF8B /* CacheMeIfYouCanTests.swift in Sources */,
+				9B57957D21BFEEAD00B9EF8B /* LogHelperTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +350,7 @@
 			files = (
 				9B57956121BF019900B9EF8B /* Cache.swift in Sources */,
 				9B57956321BF0C1A00B9EF8B /* FilesystemDataCache.swift in Sources */,
+				9B57957B21BFECD900B9EF8B /* LogHelper.swift in Sources */,
 				9B57956521BF0C4700B9EF8B /* FilesystemPathHelper.swift in Sources */,
 				9B57956721BF0C9E00B9EF8B /* DataConvertible.swift in Sources */,
 			);
@@ -530,7 +559,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CacheMeIfYouCan.app/CacheMeIfYouCan";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DemoApp.app/DemoApp";
 			};
 			name = Debug;
 		};
@@ -550,13 +579,14 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CacheMeIfYouCan.app/CacheMeIfYouCan";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DemoApp.app/DemoApp";
 			};
 			name = Release;
 		};
 		9B57955B21BF015900B9EF8B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -586,6 +616,7 @@
 		9B57955C21BF015900B9EF8B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
