@@ -20,7 +20,11 @@ public extension DataConvertibleCodable {
         return try? Self.encoder.encode(self)
     }
     
-    static func from(data: Data) -> Self? {
-        return try? Self.decoder.decode(Self.self, from: data)
+    init?(data: Data) {
+        guard let decoded = try? Self.decoder.decode(Self.self, from: data) else {
+            return nil
+        }
+        
+        self = decoded
     }
 }

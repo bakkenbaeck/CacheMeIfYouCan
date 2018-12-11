@@ -26,6 +26,9 @@
 		9B57957921BFD0E700B9EF8B /* FileManagerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57957821BFD0E700B9EF8B /* FileManagerHelper.swift */; };
 		9B57957B21BFECD900B9EF8B /* LogHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57957A21BFECD900B9EF8B /* LogHelper.swift */; };
 		9B57957D21BFEEAD00B9EF8B /* LogHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57957C21BFEEAD00B9EF8B /* LogHelperTests.swift */; };
+		9B57957F21BFF40300B9EF8B /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57957E21BFF40300B9EF8B /* ImageCache.swift */; };
+		9B57958121BFFBBC00B9EF8B /* DownloadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57958021BFFBBC00B9EF8B /* DownloadHelper.swift */; };
+		9B57958321BFFC3500B9EF8B /* CancelableTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57958221BFFC3500B9EF8B /* CancelableTask.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +86,9 @@
 		9B57957821BFD0E700B9EF8B /* FileManagerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerHelper.swift; sourceTree = "<group>"; };
 		9B57957A21BFECD900B9EF8B /* LogHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogHelper.swift; sourceTree = "<group>"; };
 		9B57957C21BFEEAD00B9EF8B /* LogHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogHelperTests.swift; sourceTree = "<group>"; };
+		9B57957E21BFF40300B9EF8B /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		9B57958021BFFBBC00B9EF8B /* DownloadHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadHelper.swift; sourceTree = "<group>"; };
+		9B57958221BFFC3500B9EF8B /* CancelableTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelableTask.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +179,7 @@
 			children = (
 				9B57956021BF019900B9EF8B /* Cache.swift */,
 				9B57956221BF0C1A00B9EF8B /* FileSystemDataCache.swift */,
+				9B57957E21BFF40300B9EF8B /* ImageCache.swift */,
 			);
 			path = CacheTypes;
 			sourceTree = "<group>";
@@ -182,6 +189,7 @@
 			children = (
 				9B57956621BF0C9E00B9EF8B /* DataConvertible.swift */,
 				9B57956D21BFBD6A00B9EF8B /* DataConvertibleCodable.swift */,
+				9B57958221BFFC3500B9EF8B /* CancelableTask.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -192,6 +200,7 @@
 				9B57956421BF0C4700B9EF8B /* FilesystemPathHelper.swift */,
 				9B57957821BFD0E700B9EF8B /* FileManagerHelper.swift */,
 				9B57957A21BFECD900B9EF8B /* LogHelper.swift */,
+				9B57958021BFFBBC00B9EF8B /* DownloadHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -370,7 +379,10 @@
 			files = (
 				9B57956121BF019900B9EF8B /* Cache.swift in Sources */,
 				9B57956321BF0C1A00B9EF8B /* FileSystemDataCache.swift in Sources */,
+				9B57958121BFFBBC00B9EF8B /* DownloadHelper.swift in Sources */,
 				9B57956E21BFBD6A00B9EF8B /* DataConvertibleCodable.swift in Sources */,
+				9B57958321BFFC3500B9EF8B /* CancelableTask.swift in Sources */,
+				9B57957F21BFF40300B9EF8B /* ImageCache.swift in Sources */,
 				9B57957921BFD0E700B9EF8B /* FileManagerHelper.swift in Sources */,
 				9B57957B21BFECD900B9EF8B /* LogHelper.swift in Sources */,
 				9B57956521BF0C4700B9EF8B /* FilesystemPathHelper.swift in Sources */,

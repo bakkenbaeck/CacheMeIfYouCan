@@ -98,7 +98,7 @@ public extension Cache {
                 completion(item)
             }
         }
-    }
+    }                                   
     
     public func remove(itemFor url: URL,
                        callbackOn queue: DispatchQueue = .main,

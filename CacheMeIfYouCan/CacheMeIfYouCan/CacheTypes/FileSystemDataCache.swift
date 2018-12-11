@@ -45,7 +45,7 @@ open class FileSystemDataCache<T: DataConvertible>: Cache {
         let url = self.localURL(for: url)
     
         let data = try Data(contentsOf: url)
-        let item = T.from(data: data)
+        let item = T(data: data)
 
         return item
     }
@@ -57,5 +57,46 @@ open class FileSystemDataCache<T: DataConvertible>: Cache {
     open func removeItem(for url: URL) throws {
         let localURL = self.localURL(for: url)
         try FileManagerHelper.removeFile(at: localURL)
+    }
+    
+    
+    public func fetchOrDownloadItem(for url: URL,
+                                    downloadHeaders: [String: String] = [:],
+                                    callbackOn queue: DispatchQueue,
+                                    failureCompletion: @escaping (Error?) -> Void,
+                                    successCompletion: @escaping (StoredType) -> Void) {
+        self.fetchItem(for: url, callbackOn: self.localQueue) { item in
+            if let item = item {
+                queue.async {
+                    successCompletion(item)
+                }
+                
+                return
+            }
+            
+            // Else, needs to be downloaded.
+            DownloadHelper.loadData(
+                from: url,
+                headers: downloadHeaders,
+                failureCompletion: { error in
+                    queue.async {
+                        failureCompletion(error)
+                    }
+                },
+                successCompletion: { [weak self] data in
+                    guard let item = T(data: data) else {
+                        queue.async {
+                            failureCompletion(nil)
+                        }
+                        return
+                    }
+                    
+                    self?.store(item: item, for: url)
+                    
+                    queue.async {
+                        successCompletion(item)
+                    }
+                })
+        }
     }
 }
