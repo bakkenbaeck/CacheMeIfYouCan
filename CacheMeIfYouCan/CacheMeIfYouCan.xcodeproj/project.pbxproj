@@ -17,9 +17,13 @@
 		9B57955821BF015900B9EF8B /* CacheMeIfYouCan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B57955121BF015900B9EF8B /* CacheMeIfYouCan.framework */; };
 		9B57955921BF015900B9EF8B /* CacheMeIfYouCan.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9B57955121BF015900B9EF8B /* CacheMeIfYouCan.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9B57956121BF019900B9EF8B /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57956021BF019900B9EF8B /* Cache.swift */; };
-		9B57956321BF0C1A00B9EF8B /* FilesystemDataCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57956221BF0C1A00B9EF8B /* FilesystemDataCache.swift */; };
+		9B57956321BF0C1A00B9EF8B /* FileSystemDataCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57956221BF0C1A00B9EF8B /* FileSystemDataCache.swift */; };
 		9B57956521BF0C4700B9EF8B /* FilesystemPathHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57956421BF0C4700B9EF8B /* FilesystemPathHelper.swift */; };
 		9B57956721BF0C9E00B9EF8B /* DataConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57956621BF0C9E00B9EF8B /* DataConvertible.swift */; };
+		9B57956E21BFBD6A00B9EF8B /* DataConvertibleCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57956D21BFBD6A00B9EF8B /* DataConvertibleCodable.swift */; };
+		9B57957321BFBEFD00B9EF8B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57957221BFBEFD00B9EF8B /* User.swift */; };
+		9B57957721BFCE0900B9EF8B /* FileSystemDataCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57957621BFCE0900B9EF8B /* FileSystemDataCacheTests.swift */; };
+		9B57957921BFD0E700B9EF8B /* FileManagerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57957821BFD0E700B9EF8B /* FileManagerHelper.swift */; };
 		9B57957B21BFECD900B9EF8B /* LogHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57957A21BFECD900B9EF8B /* LogHelper.swift */; };
 		9B57957D21BFEEAD00B9EF8B /* LogHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57957C21BFEEAD00B9EF8B /* LogHelperTests.swift */; };
 /* End PBXBuildFile section */
@@ -70,9 +74,13 @@
 		9B57955321BF015900B9EF8B /* CacheMeIfYouCan.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CacheMeIfYouCan.h; sourceTree = "<group>"; };
 		9B57955421BF015900B9EF8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B57956021BF019900B9EF8B /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
-		9B57956221BF0C1A00B9EF8B /* FilesystemDataCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesystemDataCache.swift; sourceTree = "<group>"; };
+		9B57956221BF0C1A00B9EF8B /* FileSystemDataCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemDataCache.swift; sourceTree = "<group>"; };
 		9B57956421BF0C4700B9EF8B /* FilesystemPathHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesystemPathHelper.swift; sourceTree = "<group>"; };
 		9B57956621BF0C9E00B9EF8B /* DataConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataConvertible.swift; sourceTree = "<group>"; };
+		9B57956D21BFBD6A00B9EF8B /* DataConvertibleCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataConvertibleCodable.swift; sourceTree = "<group>"; };
+		9B57957221BFBEFD00B9EF8B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		9B57957621BFCE0900B9EF8B /* FileSystemDataCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemDataCacheTests.swift; sourceTree = "<group>"; };
+		9B57957821BFD0E700B9EF8B /* FileManagerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerHelper.swift; sourceTree = "<group>"; };
 		9B57957A21BFECD900B9EF8B /* LogHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogHelper.swift; sourceTree = "<group>"; };
 		9B57957C21BFEEAD00B9EF8B /* LogHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogHelperTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -140,7 +148,9 @@
 			isa = PBXGroup;
 			children = (
 				9B57958621C0019E00B9EF8B /* TestImages */,
+				9B57957121BFBEEB00B9EF8B /* TestCacheTypes */,
 				9B57954321BF00BA00B9EF8B /* Info.plist */,
+				9B57957621BFCE0900B9EF8B /* FileSystemDataCacheTests.swift */,
 				9B57957C21BFEEAD00B9EF8B /* LogHelperTests.swift */,
 			);
 			path = CacheMeIfYouCanTests;
@@ -162,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				9B57956021BF019900B9EF8B /* Cache.swift */,
+				9B57956221BF0C1A00B9EF8B /* FileSystemDataCache.swift */,
 			);
 			path = CacheTypes;
 			sourceTree = "<group>";
@@ -170,7 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				9B57956621BF0C9E00B9EF8B /* DataConvertible.swift */,
-				9B57956221BF0C1A00B9EF8B /* FilesystemDataCache.swift */,
+				9B57956D21BFBD6A00B9EF8B /* DataConvertibleCodable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -179,11 +190,18 @@
 			isa = PBXGroup;
 			children = (
 				9B57956421BF0C4700B9EF8B /* FilesystemPathHelper.swift */,
+				9B57957821BFD0E700B9EF8B /* FileManagerHelper.swift */,
 				9B57957A21BFECD900B9EF8B /* LogHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		9B57957121BFBEEB00B9EF8B /* TestCacheTypes */ = {
+			isa = PBXGroup;
+			children = (
+				9B57957221BFBEFD00B9EF8B /* User.swift */,
+			);
+			path = TestCacheTypes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -340,6 +358,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B57957321BFBEFD00B9EF8B /* User.swift in Sources */,
+				9B57957721BFCE0900B9EF8B /* FileSystemDataCacheTests.swift in Sources */,
 				9B57957D21BFEEAD00B9EF8B /* LogHelperTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -349,7 +369,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B57956121BF019900B9EF8B /* Cache.swift in Sources */,
-				9B57956321BF0C1A00B9EF8B /* FilesystemDataCache.swift in Sources */,
+				9B57956321BF0C1A00B9EF8B /* FileSystemDataCache.swift in Sources */,
+				9B57956E21BFBD6A00B9EF8B /* DataConvertibleCodable.swift in Sources */,
+				9B57957921BFD0E700B9EF8B /* FileManagerHelper.swift in Sources */,
 				9B57957B21BFECD900B9EF8B /* LogHelper.swift in Sources */,
 				9B57956521BF0C4700B9EF8B /* FilesystemPathHelper.swift in Sources */,
 				9B57956721BF0C9E00B9EF8B /* DataConvertible.swift in Sources */,
