@@ -13,6 +13,7 @@
 		9B57953421BF00BA00B9EF8B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B57953321BF00BA00B9EF8B /* Assets.xcassets */; };
 		9B57953721BF00BA00B9EF8B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B57953521BF00BA00B9EF8B /* LaunchScreen.storyboard */; };
 		9B57954221BF00BA00B9EF8B /* CacheMeIfYouCanTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57954121BF00BA00B9EF8B /* CacheMeIfYouCanTests.swift */; };
+		9B57958721C0019E00B9EF8B /* TestImages in Resources */ = {isa = PBXBuildFile; fileRef = 9B57958621C0019E00B9EF8B /* TestImages */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		9B57953D21BF00BA00B9EF8B /* CacheMeIfYouCanTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CacheMeIfYouCanTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B57954121BF00BA00B9EF8B /* CacheMeIfYouCanTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheMeIfYouCanTests.swift; sourceTree = "<group>"; };
 		9B57954321BF00BA00B9EF8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9B57958621C0019E00B9EF8B /* TestImages */ = {isa = PBXFileReference; lastKnownFileType = folder; path = TestImages; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 		9B57954021BF00BA00B9EF8B /* CacheMeIfYouCanTests */ = {
 			isa = PBXGroup;
 			children = (
+				9B57958621C0019E00B9EF8B /* TestImages */,
 				9B57954121BF00BA00B9EF8B /* CacheMeIfYouCanTests.swift */,
 				9B57954321BF00BA00B9EF8B /* Info.plist */,
 			);
@@ -187,6 +190,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B57958721C0019E00B9EF8B /* TestImages in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
