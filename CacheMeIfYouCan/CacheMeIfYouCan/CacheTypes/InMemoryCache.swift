@@ -31,7 +31,7 @@ open class InMemoryCache<ValueType: AnyObject>: Cache {
         self.underlyingCache.removeAllObjects()
     }
     
-    open func removeItem(for url: URL) throws {
+    open func actuallyRemoveItem(for url: URL) throws {
         let key = self.key(for: url)
         self.underlyingCache.removeObject(forKey: key)
     }

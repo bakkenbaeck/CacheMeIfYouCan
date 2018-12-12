@@ -57,7 +57,7 @@ open class FileSystemDataCache<T: DataConvertible>: Cache {
         try FileManagerHelper.removeContentsOfFolder(at: self.folderURL)
     }
 
-    open func removeItem(for url: URL) throws {
+    open func actuallyRemoveItem(for url: URL) throws {
         let localURL = self.localURL(for: url)
         try FileManagerHelper.removeFile(at: localURL)
     }

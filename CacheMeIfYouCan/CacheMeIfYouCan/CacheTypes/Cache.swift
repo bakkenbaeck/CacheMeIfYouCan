@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Default caching protocol.
 public protocol Cache: class {
     associatedtype StoredType
     
@@ -20,7 +21,7 @@ public protocol Cache: class {
     /// Performs, on whatever thread its called on, the removal operation.
     ///
     /// - Parameter url: The URL to remove the current item for.
-    func removeItem(for url: URL) throws
+    func actuallyRemoveItem(for url: URL) throws
     
     /// Performs, on whatever thread it's called on, the storage operation
     ///
@@ -36,6 +37,8 @@ public protocol Cache: class {
     func actuallyFetchItem(for url: URL) throws -> StoredType?
 }
 
+// MARK: - Default implementation
+
 public extension Cache {
     
     public static var defaultQueue: DispatchQueue {
@@ -45,12 +48,12 @@ public extension Cache {
             attributes: [])
     }
     
-    /// Stores an item using the local queue
+    /// Stores an item using the local queue to ensure order of operations
     ///
     /// - Parameters:
     ///   - item: The item to store
     ///   - url: The URL to store it for
-    ///   - queue: The queue to fire the completion closure on - defaults to the main queue.
+    ///   - queue: The queue to fire the completion closure on. Defaults to the main queue.
     ///   - completion: [Optional] The completion closure to fire. Defaults to nil.
     public func store(item: StoredType,
                       for url: URL,
@@ -78,6 +81,14 @@ public extension Cache {
         }
     }
     
+    /// Fetches an item using the local queue to ensure order of operations
+    ///
+    /// - Parameters:
+    ///   - url: The URL to search for an item for.
+    ///   - queue: The queue to fire the completion closure on. Defaults to the main queue.
+    ///   - completion: The completion closure to fire.
+    ///                 Params:
+    ///                 - [Optional] The stored item found at the given url, or nil.
     public func fetchItem(for url: URL,
                           callbackOn queue: DispatchQueue = .main,
                           completion: @escaping (StoredType?) -> Void) {
@@ -100,9 +111,16 @@ public extension Cache {
         }
     }                                   
     
-    public func remove(itemFor url: URL,
-                       callbackOn queue: DispatchQueue = .main,
-                       completion: (() -> Void)? = nil) {
+    
+    /// Fetches an item using the local queue to ensure order of operations
+    ///
+    /// - Parameters:
+    ///   - url: The URL to remove any stored item for.
+    ///   - queue: The queue to fire the completion closure on. Defaults to the main queue.
+    ///   - completion: [Optional] The completion closure to fire. Defaults to nil.
+    public func removeItem(for url: URL,
+                           callbackOn queue: DispatchQueue = .main,
+                           completion: (() -> Void)? = nil) {
         self.localQueue.async { [weak self] in
             guard let self = self else {
                 completion?()
@@ -110,7 +128,7 @@ public extension Cache {
             }
             
             do {
-                try self.removeItem(for: url)
+                try self.actuallyRemoveItem(for: url)
             } catch {
                 LogHelper.log("Could not remove item")
             }

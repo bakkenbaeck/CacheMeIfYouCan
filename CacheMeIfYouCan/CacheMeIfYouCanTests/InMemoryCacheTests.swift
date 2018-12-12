@@ -58,7 +58,7 @@ class InMemoryCacheTests: XCTestCase {
                              line: UInt = #line) {
         let expectation = self.expectation(description: "Removed image")
         
-        cache.remove(itemFor: url) {
+        cache.removeItem(for: url) {
             XCTAssertTrue(Thread.isMainThread,
                           "Callbacks should be on the main thread by default!",
                           file: file,

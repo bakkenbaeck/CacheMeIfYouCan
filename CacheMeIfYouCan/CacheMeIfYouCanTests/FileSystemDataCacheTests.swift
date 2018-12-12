@@ -85,7 +85,7 @@ class FileSystemDataCacheTests: XCTestCase {
                             line: UInt = #line) {
         let userRemoveExpectation = self.expectation(description: "User remove expectation")
         
-        cache.remove(itemFor: url) {
+        cache.removeItem(for: url) {
             XCTAssertTrue(Thread.isMainThread,
                           "Callback should be on main thread by default",
                           file: file,
@@ -271,7 +271,7 @@ class FileSystemDataCacheTests: XCTestCase {
         XCTAssertEqual(initialFetchedUser, self.user1)
         
         // Remove, but don't wait for the completion to fire before trying to grab it again.
-        cache.remove(itemFor: self.user1URL)
+        cache.removeItem(for: self.user1URL)
         
         let fetchedUser = self.fetchUser(for: self.user1URL, from: cache)
         XCTAssertNil(fetchedUser)
