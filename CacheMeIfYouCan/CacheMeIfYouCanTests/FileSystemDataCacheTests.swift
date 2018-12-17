@@ -33,10 +33,10 @@ class FileSystemDataCacheTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        let cachesFolder = URL(fileURLWithPath: FilesystemPathHelper.cachesPath)
+        let cachesFolder = URL(fileURLWithPath: FileSystemPathHelper.cachesPath)
         try? FileManagerHelper.removeContentsOfFolder(at: cachesFolder)
         
-        let documentsFolder = URL(fileURLWithPath: FilesystemPathHelper.documentsPath)
+        let documentsFolder = URL(fileURLWithPath: FileSystemPathHelper.documentsPath)
         try? FileManagerHelper.removeContentsOfFolder(at: documentsFolder)
     }
 
@@ -109,7 +109,7 @@ class FileSystemDataCacheTests: XCTestCase {
         // Store some users and make sure they're stored and can be retrieved
         self.storeUser(self.user1, for: self.user1URL, in: cache)
         
-        let user1ExpectedPath = FilesystemPathHelper.path(byAppending: "1", to: url.path)
+        let user1ExpectedPath = FileSystemPathHelper.path(byAppending: "1", to: url.path)
         XCTAssertTrue(FileManagerHelper.fileExists(at: user1ExpectedPath))
         
         guard let fetchedUser1 = self.fetchUser(for: self.user1URL, from: cache) else {
@@ -121,7 +121,7 @@ class FileSystemDataCacheTests: XCTestCase {
         
         self.storeUser(user2, for: user2URL, in: cache)
         
-        let user2ExpectedPath = FilesystemPathHelper.path(byAppending: "2", to: url.path)
+        let user2ExpectedPath = FileSystemPathHelper.path(byAppending: "2", to: url.path)
         XCTAssertTrue(FileManagerHelper.fileExists(at: user2ExpectedPath))
         
         guard let fetchedUser2 = self.fetchUser(for: self.user2URL, from: cache) else {
@@ -133,7 +133,7 @@ class FileSystemDataCacheTests: XCTestCase {
         
         self.storeUser(self.user3, for: self.user3URL, in: cache)
         
-        let user3ExpectedPath = FilesystemPathHelper.path(byAppending: "3", to: url.path)
+        let user3ExpectedPath = FileSystemPathHelper.path(byAppending: "3", to: url.path)
         XCTAssertTrue(FileManagerHelper.fileExists(at: user3ExpectedPath))
         
         guard let fetchedUser3 = self.fetchUser(for: self.user3URL, from: cache) else {
@@ -189,25 +189,25 @@ class FileSystemDataCacheTests: XCTestCase {
     // MARK: - Tests
     
     func testStoringInCachesDirectory() throws {
-        let usersInCaches = FilesystemPathHelper.pathInCachesToFolder(named: "users")
+        let usersInCaches = FileSystemPathHelper.pathInCachesToFolder(named: "users")
         let url = URL(fileURLWithPath: usersInCaches)
         try self.validateStoring(with: url)
     }
     
     func testStoringInDocumentsDirectory() throws {
-        let usersInDocuments = FilesystemPathHelper.pathInDocumentsToFolder(named: "documents")
+        let usersInDocuments = FileSystemPathHelper.pathInDocumentsToFolder(named: "documents")
         let url = URL(fileURLWithPath: usersInDocuments)
         try self.validateStoring(with: url)
     }
     
     func testReplacingExistingStoredItemInCaches() {
-        let usersInCaches = FilesystemPathHelper.pathInCachesToFolder(named: "users")
+        let usersInCaches = FileSystemPathHelper.pathInCachesToFolder(named: "users")
         let url = URL(fileURLWithPath: usersInCaches)
         self.validateReplacingItem(url: url)
     }
     
     func testReplacingExistingStoredItemInDocuments() {
-        let usersInDocuments = FilesystemPathHelper.pathInDocumentsToFolder(named: "users")
+        let usersInDocuments = FileSystemPathHelper.pathInDocumentsToFolder(named: "users")
         let url = URL(fileURLWithPath: usersInDocuments)
         self.validateReplacingItem(url: url)
     }
@@ -215,7 +215,7 @@ class FileSystemDataCacheTests: XCTestCase {
     func testCallingBackOnNonMainQueue() {
         let queue = DispatchQueue(label: "testQueue", qos: .userInitiated, attributes: [.concurrent])
         
-        let usersInDocuments = FilesystemPathHelper.pathInDocumentsToFolder(named: "users")
+        let usersInDocuments = FileSystemPathHelper.pathInDocumentsToFolder(named: "users")
         let url = URL(fileURLWithPath: usersInDocuments)
         let cache = UserCache(folderURL: url)
         
@@ -246,7 +246,7 @@ class FileSystemDataCacheTests: XCTestCase {
     }
     
     func testCachingWithoutWaitingReturnsCachedItem() {
-        let usersInDocuments = FilesystemPathHelper.pathInDocumentsToFolder(named: "users")
+        let usersInDocuments = FileSystemPathHelper.pathInDocumentsToFolder(named: "users")
         let url = URL(fileURLWithPath: usersInDocuments)
         let cache = UserCache(folderURL: url)
         
@@ -258,7 +258,7 @@ class FileSystemDataCacheTests: XCTestCase {
     }
     
     func testRemovingWithoutWaitingDoesReturnCachedItem() {
-        let usersInDocuments = FilesystemPathHelper.pathInDocumentsToFolder(named: "users")
+        let usersInDocuments = FileSystemPathHelper.pathInDocumentsToFolder(named: "users")
         let url = URL(fileURLWithPath: usersInDocuments)
         let cache = UserCache(folderURL: url)
         

@@ -27,7 +27,7 @@ open class FileSystemDataCache<T: DataConvertible>: Cache {
     }
     
     private func localURL(for url: URL) -> URL {
-        let fileName = FilesystemPathHelper.fileName(from: url)
+        let fileName = FileSystemPathHelper.fileName(from: url)
         return self.folderURL
             .appendingPathComponent(fileName)
     }

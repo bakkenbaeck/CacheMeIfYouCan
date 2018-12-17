@@ -17,7 +17,7 @@
 		9B57955921BF015900B9EF8B /* CacheMeIfYouCan.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9B57955121BF015900B9EF8B /* CacheMeIfYouCan.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9B57956121BF019900B9EF8B /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57956021BF019900B9EF8B /* Cache.swift */; };
 		9B57956321BF0C1A00B9EF8B /* FileSystemDataCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57956221BF0C1A00B9EF8B /* FileSystemDataCache.swift */; };
-		9B57956521BF0C4700B9EF8B /* FilesystemPathHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57956421BF0C4700B9EF8B /* FilesystemPathHelper.swift */; };
+		9B57956521BF0C4700B9EF8B /* FileSystemPathHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57956421BF0C4700B9EF8B /* FileSystemPathHelper.swift */; };
 		9B57956721BF0C9E00B9EF8B /* DataConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57956621BF0C9E00B9EF8B /* DataConvertible.swift */; };
 		9B57956921BFBABF00B9EF8B /* InMemoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57956821BFBABF00B9EF8B /* InMemoryCache.swift */; };
 		9B57956E21BFBD6A00B9EF8B /* DataConvertibleCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57956D21BFBD6A00B9EF8B /* DataConvertibleCodable.swift */; };
@@ -82,7 +82,7 @@
 		9B57955421BF015900B9EF8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B57956021BF019900B9EF8B /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		9B57956221BF0C1A00B9EF8B /* FileSystemDataCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemDataCache.swift; sourceTree = "<group>"; };
-		9B57956421BF0C4700B9EF8B /* FilesystemPathHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesystemPathHelper.swift; sourceTree = "<group>"; };
+		9B57956421BF0C4700B9EF8B /* FileSystemPathHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemPathHelper.swift; sourceTree = "<group>"; };
 		9B57956621BF0C9E00B9EF8B /* DataConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataConvertible.swift; sourceTree = "<group>"; };
 		9B57956821BFBABF00B9EF8B /* InMemoryCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryCache.swift; sourceTree = "<group>"; };
 		9B57956D21BFBD6A00B9EF8B /* DataConvertibleCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataConvertibleCodable.swift; sourceTree = "<group>"; };
@@ -211,7 +211,7 @@
 		9B57956C21BFBCE700B9EF8B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				9B57956421BF0C4700B9EF8B /* FilesystemPathHelper.swift */,
+				9B57956421BF0C4700B9EF8B /* FileSystemPathHelper.swift */,
 				9B57957821BFD0E700B9EF8B /* FileManagerHelper.swift */,
 				9B57957A21BFECD900B9EF8B /* LogHelper.swift */,
 				9B57958021BFFBBC00B9EF8B /* DownloadHelper.swift */,
@@ -405,7 +405,7 @@
 				9B57957921BFD0E700B9EF8B /* FileManagerHelper.swift in Sources */,
 				9B57957B21BFECD900B9EF8B /* LogHelper.swift in Sources */,
 				9B57956921BFBABF00B9EF8B /* InMemoryCache.swift in Sources */,
-				9B57956521BF0C4700B9EF8B /* FilesystemPathHelper.swift in Sources */,
+				9B57956521BF0C4700B9EF8B /* FileSystemPathHelper.swift in Sources */,
 				9B57956721BF0C9E00B9EF8B /* DataConvertible.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct FilesystemPathHelper {
+public struct FileSystemPathHelper {
     
     public static func fileName(from url: URL) -> String {
         return url.lastPathComponent
