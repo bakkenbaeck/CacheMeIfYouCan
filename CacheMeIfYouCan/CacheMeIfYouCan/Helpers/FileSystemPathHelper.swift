@@ -23,12 +23,12 @@ public struct FileSystemPathHelper {
             }
         }
         
-        func pathToFolder(named folderName: String) -> String {
+        func pathToSubdirectory(named subdirectoryName: String) -> String {
             switch self {
             case .caches:
-                return FileSystemPathHelper.pathInCachesToFolder(named: folderName)
+                return FileSystemPathHelper.pathInCachesToDirectory(named: subdirectoryName)
             case .documents:
-                return FileSystemPathHelper.pathInDocumentsToFolder(named: folderName)
+                return FileSystemPathHelper.pathInDocumentsToDirectory(named: subdirectoryName)
             }
         }
     }
@@ -57,11 +57,11 @@ public struct FileSystemPathHelper {
         return (existingPath as NSString).appendingPathComponent(component)
     }
     
-    public static func pathInCachesToFolder(named folderName: String) -> String {
-        return self.path(byAppending: folderName, to: self.cachesPath)
+    public static func pathInCachesToDirectory(named directoryName: String) -> String {
+        return self.path(byAppending: directoryName, to: self.cachesPath)
     }
     
-    public static func pathInDocumentsToFolder(named folderName: String) -> String {
-        return self.path(byAppending: folderName, to: self.documentsPath)
+    public static func pathInDocumentsToDirectory(named directoryName: String) -> String {
+        return self.path(byAppending: directoryName, to: self.documentsPath)
     }
 }

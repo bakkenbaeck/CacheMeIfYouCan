@@ -12,7 +12,7 @@ open class FileSystemDataCache<T: DataConvertible>: Cache {
     
     public typealias StoredType = T
     
-    let folderURL: URL
+    let directoryURL: URL
     
     public lazy var localQueue = FileSystemDataCache.defaultQueue
     
@@ -21,31 +21,31 @@ open class FileSystemDataCache<T: DataConvertible>: Cache {
     ///
     /// - Parameters:
     ///   - rootDirectory: The root directory where the 
-    ///   - folderName: A non-empty name for the folder to store items in for this cache. NOTE: An empty string will cause this initializer to fail.
+    ///   - subdirectoryName: A non-empty name for the sub-directory of the root to store items in for this cache. NOTE: An empty string will cause this initializer to fail.
     public init?(rootDirectory: FileSystemPathHelper.UserDirectory,
-                folderName: String) {
-        guard !folderName.isEmpty else {
+                 subdirectoryName: String) {
+        guard !subdirectoryName.isEmpty else {
             if !TestHelper.isTesting {
                 // Tell the developer they shouldn't be doing this during development.
-                assertionFailure("You need to pass in a folder name!")
+                assertionFailure("You need to pass in a sub-directory name!")
             }
             return nil
         }
         
-        let path = rootDirectory.pathToFolder(named: folderName)
+        let path = rootDirectory.pathToSubdirectory(named: subdirectoryName)
         
-        self.folderURL = URL(fileURLWithPath: path)
+        self.directoryURL = URL(fileURLWithPath: path)
         
         do {
-            try FileManagerHelper.createFolderIfNeeded(at: self.folderURL)
+            try FileManagerHelper.createDirectoryIfNeeded(at: self.directoryURL)
         } catch {
-            LogHelper.log("Error creating folder: \(error)")
+            LogHelper.log("Error creating directory: \(error)")
         }
     }
     
     private func localURL(for url: URL) -> URL {
         let fileName = FileSystemPathHelper.fileName(from: url)
-        return self.folderURL
+        return self.directoryURL
             .appendingPathComponent(fileName)
     }
     
@@ -71,7 +71,7 @@ open class FileSystemDataCache<T: DataConvertible>: Cache {
     }
     
     open func clearAll() throws {
-        try FileManagerHelper.removeContentsOfFolder(at: self.folderURL)
+        try FileManagerHelper.removeContentsOfDirectory(at: self.directoryURL)
     }
 
     open func actuallyRemoveItem(for url: URL) throws {

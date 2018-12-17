@@ -15,11 +15,11 @@ class ImageCacheTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        let cachesFolder = URL(fileURLWithPath: FileSystemPathHelper.cachesPath)
-        try? FileManagerHelper.removeContentsOfFolder(at: cachesFolder)
+        let cachesDirectory = URL(fileURLWithPath: FileSystemPathHelper.cachesPath)
+        try? FileManagerHelper.removeContentsOfDirectory(at: cachesDirectory)
         
-        let documentsFolder = URL(fileURLWithPath: FileSystemPathHelper.documentsPath)
-        try? FileManagerHelper.removeContentsOfFolder(at: documentsFolder)
+        let documentsDirectory = URL(fileURLWithPath: FileSystemPathHelper.documentsPath)
+        try? FileManagerHelper.removeContentsOfDirectory(at: documentsDirectory)
     }
     
     private func downloadOrCache(for url: URL,
@@ -84,14 +84,14 @@ class ImageCacheTests: XCTestCase {
     }
     
     func testDownloadOrCache() {
-        let cachesImagesPath = FileSystemPathHelper.pathInCachesToFolder(named: "images")
+        let cachesImagesPath = FileSystemPathHelper.pathInCachesToDirectory(named: "images")
         let url = URL(fileURLWithPath: cachesImagesPath)
         
         // Are we starting without the file downloaded?
         let expectedHomerPath = FileSystemPathHelper.path(byAppending: "homer.png", to: url.path)
         XCTAssertFalse(FileManagerHelper.fileExists(at: expectedHomerPath))
         
-        guard let cache = ImageCache(rootDirectory: .caches, folderName: "images") else {
+        guard let cache = ImageCache(rootDirectory: .caches, subdirectoryName: "images") else {
             XCTFail("Failed to create image cache!")
             return
         }

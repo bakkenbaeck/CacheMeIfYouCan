@@ -22,30 +22,30 @@ public struct FileManagerHelper {
         return self.fileExists(at: url.path)
     }
     
-    public static func folderExists(at path: String) -> Bool {
+    public static func directoryExists(at path: String) -> Bool {
         var isDirectory: ObjCBool = false
         let exists = self.fileManager.fileExists(atPath: path, isDirectory: &isDirectory)
         return exists && isDirectory.boolValue
     }
     
-    public static func folderExists(at url: URL) -> Bool {
-        return self.folderExists(at: url.path)
+    public static func directoryExists(at url: URL) -> Bool {
+        return self.directoryExists(at: url.path)
     }
     
-    public static func createFolder(at url: URL) throws {
+    public static func createDirectory(at url: URL) throws {
         try self.fileManager.createDirectory(at: url, withIntermediateDirectories: true)
     }
     
-    public static func createFolderIfNeeded(at url: URL) throws {
-        if self.folderExists(at: url) {
+    public static func createDirectoryIfNeeded(at url: URL) throws {
+        if self.directoryExists(at: url) {
             return
         }
         
-        try self.createFolder(at: url)
+        try self.createDirectory(at: url)
     }
     
-    public static func contentsOfFolder(at url: URL) throws -> [URL] {
-        guard self.folderExists(at: url) else {
+    public static func contentsOfDirectory(at url: URL) throws -> [URL] {
+        guard self.directoryExists(at: url) else {
             return []
         }
         
@@ -54,13 +54,13 @@ public struct FileManagerHelper {
                                                         options: [.skipsHiddenFiles])
     }
     
-    public static func removeContentsOfFolder(at url: URL) throws {
-        guard self.folderExists(at: url) else {
+    public static func removeContentsOfDirectory(at url: URL) throws {
+        guard self.directoryExists(at: url) else {
             // Nothing to remove
             return
         }
         
-        let urls = try self.contentsOfFolder(at: url)
+        let urls = try self.contentsOfDirectory(at: url)
         try urls.forEach { fileURL in
             try self.fileManager.removeItem(at: fileURL)
         }
