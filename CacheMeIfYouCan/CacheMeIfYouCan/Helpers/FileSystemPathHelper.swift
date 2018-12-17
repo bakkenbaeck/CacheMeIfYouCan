@@ -10,6 +10,29 @@ import Foundation
 
 public struct FileSystemPathHelper {
     
+    public enum UserDirectory {
+        case caches
+        case documents
+        
+        var path: String {
+            switch self {
+            case .caches:
+                return FileSystemPathHelper.cachesPath
+            case .documents:
+                return FileSystemPathHelper.documentsPath
+            }
+        }
+        
+        func pathToFolder(named folderName: String) -> String {
+            switch self {
+            case .caches:
+                return FileSystemPathHelper.pathInCachesToFolder(named: folderName)
+            case .documents:
+                return FileSystemPathHelper.pathInDocumentsToFolder(named: folderName)
+            }
+        }
+    }
+    
     public static func fileName(from url: URL) -> String {
         return url.lastPathComponent
     }

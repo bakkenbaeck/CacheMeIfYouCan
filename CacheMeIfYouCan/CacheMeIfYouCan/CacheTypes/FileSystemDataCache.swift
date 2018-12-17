@@ -16,11 +16,28 @@ open class FileSystemDataCache<T: DataConvertible>: Cache {
     
     public lazy var localQueue = FileSystemDataCache.defaultQueue
     
-    public init(folderURL: URL) {
-        self.folderURL = folderURL
+    
+    /// Designated initializer.
+    ///
+    /// - Parameters:
+    ///   - rootDirectory: The root directory where the 
+    ///   - folderName: A non-empty name for the folder to store items in for this cache. NOTE: An empty string will cause this initializer to fail.
+    public init?(rootDirectory: FileSystemPathHelper.UserDirectory,
+                folderName: String) {
+        guard !folderName.isEmpty else {
+            if !TestHelper.isTesting {
+                // Tell the developer they shouldn't be doing this during development.
+                assertionFailure("You need to pass in a folder name!")
+            }
+            return nil
+        }
+        
+        let path = rootDirectory.pathToFolder(named: folderName)
+        
+        self.folderURL = URL(fileURLWithPath: path)
         
         do {
-            try FileManagerHelper.createFolderIfNeeded(at: folderURL)
+            try FileManagerHelper.createFolderIfNeeded(at: self.folderURL)
         } catch {
             LogHelper.log("Error creating folder: \(error)")
         }
