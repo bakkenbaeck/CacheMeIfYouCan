@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Allows UIImage to conform to the `DataConvertible` type.
 extension UIImage: DataConvertible {
     
     public var toData: Data? {
@@ -17,4 +18,6 @@ extension UIImage: DataConvertible {
     // UIImage already has a failable initializer with data, so no need to override.
 }
 
+
+/// A `FileSystemDataCache` dedicated to caching images.
 open class ImageCache: FileSystemDataCache<UIImage> {}

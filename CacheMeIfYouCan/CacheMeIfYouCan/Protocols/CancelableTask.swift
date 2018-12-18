@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Wrapper protocol to allow mock URL sessions to pretend to "cancel" tasks.
 public protocol CancelableTask {
     func cancel()
 }

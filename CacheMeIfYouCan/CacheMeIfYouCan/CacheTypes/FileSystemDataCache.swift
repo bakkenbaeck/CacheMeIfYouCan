@@ -8,6 +8,8 @@
 
 import Foundation
 
+/// Stores any type which can be converted to raw `Data` on the
+/// device's local filesystem.
 open class FileSystemDataCache<T: DataConvertible>: Cache {
     
     public typealias StoredType = T
@@ -20,7 +22,7 @@ open class FileSystemDataCache<T: DataConvertible>: Cache {
     /// Designated initializer.
     ///
     /// - Parameters:
-    ///   - rootDirectory: The root directory where the 
+    ///   - rootDirectory: The root directory where the sub-directory containing this cache should be created.
     ///   - subdirectoryName: A non-empty name for the sub-directory of the root to store items in for this cache. NOTE: An empty string will cause this initializer to fail.
     public init?(rootDirectory: FileSystemPathHelper.UserDirectory,
                  subdirectoryName: String) {

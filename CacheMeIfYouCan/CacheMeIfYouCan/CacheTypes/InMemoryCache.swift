@@ -8,6 +8,9 @@
 
 import Foundation
 
+/// Caches in-memory using NSCache - note that this restricts the
+/// types of values you can store to `AnyObject`, so you may need to
+/// add some kind of wrapper class to `struct` types such as `String`.
 open class InMemoryCache<ValueType: AnyObject>: Cache {
     public lazy var localQueue = InMemoryCache.defaultQueue
     

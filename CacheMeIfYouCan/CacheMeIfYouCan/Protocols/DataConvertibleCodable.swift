@@ -8,11 +8,17 @@
 
 import Foundation
 
+/// An extension of the `Codable` protocol to also allow it to be `DataConvertible`.
 public protocol DataConvertibleCodable: DataConvertible, Codable {
     
+    // The encoder to use for this type.
     static var encoder: JSONEncoder { get }
+    
+    // The decoder to use for this type.
     static var decoder: JSONDecoder { get }
 }
+
+// MARK: - Default implementation
 
 public extension DataConvertibleCodable {
     
