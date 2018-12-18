@@ -185,20 +185,24 @@ class FileSystemDataCacheTests: XCTestCase {
     // MARK: - Tests
     
     func testPassingEmptyOrNilStringForSubdirectoryNameCreatesDirectoryWithClassName() {
-        _ = UserCache(rootDirectory: .documents, subdirectoryName: "")
         let userCacheInDocsPath = FileSystemPathHelper.UserDirectory.documents.pathToSubdirectory(named: "UserCache")
+        XCTAssertFalse(FileManagerHelper.directoryExists(at: userCacheInDocsPath))
+        _ = UserCache(rootDirectory: .documents, subdirectoryName: "")
         XCTAssertTrue(FileManagerHelper.directoryExists(at: userCacheInDocsPath))
         
-        _ = ImageCache(rootDirectory: .documents, subdirectoryName: nil)
         let imageCacheInDocsPath = FileSystemPathHelper.UserDirectory.documents.pathToSubdirectory(named: "ImageCache")
+        XCTAssertFalse(FileManagerHelper.directoryExists(at: imageCacheInDocsPath))
+        _ = ImageCache(rootDirectory: .documents, subdirectoryName: nil)
         XCTAssertTrue(FileManagerHelper.directoryExists(at: imageCacheInDocsPath))
         
-        _ = ImageCache(rootDirectory: .caches, subdirectoryName: "")
         let imageCacheInCachesPath = FileSystemPathHelper.UserDirectory.caches.pathToSubdirectory(named: "ImageCache")
+        XCTAssertFalse(FileManagerHelper.directoryExists(at: imageCacheInCachesPath))
+        _ = ImageCache(rootDirectory: .caches, subdirectoryName: "")
         XCTAssertTrue(FileManagerHelper.directoryExists(at: imageCacheInCachesPath))
         
-        _ = UserCache(rootDirectory: .caches, subdirectoryName: nil)
         let userCacheInCachesPath = FileSystemPathHelper.UserDirectory.caches.pathToSubdirectory(named: "UserCache")
+        XCTAssertFalse(FileManagerHelper.directoryExists(at: userCacheInCachesPath))
+        _ = UserCache(rootDirectory: .caches, subdirectoryName: nil)
         XCTAssertTrue(FileManagerHelper.directoryExists(at: userCacheInCachesPath))
     }
     
