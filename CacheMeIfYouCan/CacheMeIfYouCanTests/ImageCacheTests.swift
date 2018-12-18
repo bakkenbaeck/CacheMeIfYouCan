@@ -15,10 +15,10 @@ class ImageCacheTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        let cachesDirectory = URL(fileURLWithPath: FileSystemPathHelper.cachesPath)
+        let cachesDirectory = FileSystemPathHelper.UserDirectory.caches.url
         try? FileManagerHelper.removeContentsOfDirectory(at: cachesDirectory)
         
-        let documentsDirectory = URL(fileURLWithPath: FileSystemPathHelper.documentsPath)
+        let documentsDirectory = FileSystemPathHelper.UserDirectory.documents.url
         try? FileManagerHelper.removeContentsOfDirectory(at: documentsDirectory)
     }
     
@@ -84,7 +84,7 @@ class ImageCacheTests: XCTestCase {
     }
     
     func testDownloadOrCache() {
-        let cachesImagesPath = FileSystemPathHelper.pathInCachesToDirectory(named: "images")
+        let cachesImagesPath = FileSystemPathHelper.UserDirectory.caches.pathToSubdirectory(named: "images")
         let url = URL(fileURLWithPath: cachesImagesPath)
         
         // Are we starting without the file downloaded?

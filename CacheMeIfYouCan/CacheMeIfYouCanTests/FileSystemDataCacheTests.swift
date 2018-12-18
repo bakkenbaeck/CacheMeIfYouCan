@@ -33,10 +33,10 @@ class FileSystemDataCacheTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        let cachesDirectory = URL(fileURLWithPath: FileSystemPathHelper.cachesPath)
+        let cachesDirectory = FileSystemPathHelper.UserDirectory.caches.url
         try? FileManagerHelper.removeContentsOfDirectory(at: cachesDirectory)
         
-        let documentsDirectory = URL(fileURLWithPath: FileSystemPathHelper.documentsPath)
+        let documentsDirectory = FileSystemPathHelper.UserDirectory.documents.url
         try? FileManagerHelper.removeContentsOfDirectory(at: documentsDirectory)
     }
 
@@ -194,7 +194,7 @@ class FileSystemDataCacheTests: XCTestCase {
     }
     
     func testStoringInCachesDirectory() throws {
-        let usersInCaches = FileSystemPathHelper.pathInCachesToDirectory(named: "users")
+        let usersInCaches = FileSystemPathHelper.UserDirectory.caches.pathToSubdirectory(named: "users")
         let url = URL(fileURLWithPath: usersInCaches)
         
         // Directory should not be there and should have no contents before cache is created.
@@ -210,7 +210,8 @@ class FileSystemDataCacheTests: XCTestCase {
     }
     
     func testStoringInDocumentsDirectory() throws {
-        let usersInDocuments = FileSystemPathHelper.pathInDocumentsToDirectory(named: "users")
+        let usersInDocuments = FileSystemPathHelper.UserDirectory.documents.pathToSubdirectory(named: "users")
+            
         let url = URL(fileURLWithPath: usersInDocuments)
         
         // Directory should not be there and should have no contents before cache is created.

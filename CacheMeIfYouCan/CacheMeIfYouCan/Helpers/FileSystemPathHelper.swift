@@ -8,60 +8,54 @@
 
 import Foundation
 
+/// A helper struct to make creating paths more readable.
 public struct FileSystemPathHelper {
     
-    public enum UserDirectory {
+    /// Enum wrappers for accessing commonly used directories in the user domain mask.
+    public enum UserDirectory: String {
         case caches
         case documents
         
-        var path: String {
+        /// The full path to this directory in the user domain.
+        public var path: String {
+            let directory: FileManager.SearchPathDirectory
+            
             switch self {
             case .caches:
-                return FileSystemPathHelper.cachesPath
+                directory = .cachesDirectory
             case .documents:
-                return FileSystemPathHelper.documentsPath
+                directory = .documentDirectory
             }
+            
+            guard let path = NSSearchPathForDirectoriesInDomains(directory, .userDomainMask, true).first else {
+                fatalError("Could not get \(self.rawValue) directory path!")
+            }
+            
+            return path
         }
         
-        func pathToSubdirectory(named subdirectoryName: String) -> String {
-            switch self {
-            case .caches:
-                return FileSystemPathHelper.pathInCachesToDirectory(named: subdirectoryName)
-            case .documents:
-                return FileSystemPathHelper.pathInDocumentsToDirectory(named: subdirectoryName)
-            }
+        public var url: URL {
+            return URL(fileURLWithPath: self.path)
+        }
+
+        /// The full path to the given sub-directory of this directory in the user domain.
+        /// - Parameters:
+        ///     - subdirectoryName: The name of the sub-direcory you wish to access in the current directory.
+        public func pathToSubdirectory(named subdirectoryName: String) -> String {
+            return FileSystemPathHelper.path(byAppending: subdirectoryName, to: self.path)
         }
     }
     
+    
+    /// Uses the last path component of a URL to create a file name string for the given URL
+    ///
+    /// - Parameter url: The URL to create a file name for.
+    /// - Returns: The last path component as a string
     public static func fileName(from url: URL) -> String {
         return url.lastPathComponent
     }
     
-    public static var documentsPath: String {
-        guard let docsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first else {
-            fatalError("Could not get documents directory path!")
-        }
-        
-        return docsPath
-    }
-    
-    public static var cachesPath: String {
-        guard let cachesPath = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first else {
-            fatalError("Could not get caches directory path!")
-        }
-        
-        return cachesPath
-    }
-    
     public static func path(byAppending component: String, to existingPath: String) -> String {
         return (existingPath as NSString).appendingPathComponent(component)
-    }
-    
-    public static func pathInCachesToDirectory(named directoryName: String) -> String {
-        return self.path(byAppending: directoryName, to: self.cachesPath)
-    }
-    
-    public static func pathInDocumentsToDirectory(named directoryName: String) -> String {
-        return self.path(byAppending: directoryName, to: self.documentsPath)
     }
 }
