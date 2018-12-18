@@ -18,23 +18,25 @@ open class FileSystemDataCache<T: DataConvertible>: Cache {
     
     public lazy var localQueue = FileSystemDataCache.defaultQueue
     
-    
     /// Designated initializer.
     ///
     /// - Parameters:
     ///   - rootDirectory: The root directory where the sub-directory containing this cache should be created.
-    ///   - subdirectoryName: A non-empty name for the sub-directory of the root to store items in for this cache. NOTE: An empty string will cause this initializer to fail.
-    public init?(rootDirectory: FileSystemPathHelper.UserDirectory,
-                 subdirectoryName: String) {
-        guard !subdirectoryName.isEmpty else {
-            if !TestHelper.isTesting {
-                // Tell the developer they shouldn't be doing this during development.
-                assertionFailure("You need to pass in a sub-directory name!")
-            }
-            return nil
+    ///   - subdirectoryName: [Optional] A non-empty name for the sub-directory of the root to store items in for this cache.
+    ///                       If an empty or nil string is passed, the name of the class will be used to create the subdirectory.
+    public init(rootDirectory: FileSystemPathHelper.UserDirectory,
+                subdirectoryName: String? = nil) {
+        let finalSubdirectoryName: String
+        if
+            let name = subdirectoryName,
+            !name.isEmpty {
+                finalSubdirectoryName = name
+        } else {
+            finalSubdirectoryName = String(describing: type(of: self))
         }
-        
-        let path = rootDirectory.pathToSubdirectory(named: subdirectoryName)
+
+        print("Final subdirectory name: \(finalSubdirectoryName)")
+        let path = rootDirectory.pathToSubdirectory(named: finalSubdirectoryName)
         
         self.directoryURL = URL(fileURLWithPath: path)
         

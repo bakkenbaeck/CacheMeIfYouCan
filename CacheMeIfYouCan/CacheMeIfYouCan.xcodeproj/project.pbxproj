@@ -34,7 +34,6 @@
 		9B57958B21C00DB000B9EF8B /* InMemoryCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57958A21C00DB000B9EF8B /* InMemoryCacheTests.swift */; };
 		9B57958D21C010AA00B9EF8B /* InMemoryImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57958C21C010AA00B9EF8B /* InMemoryImageCache.swift */; };
 		9B57958F21C010E300B9EF8B /* TestImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57958E21C010E300B9EF8B /* TestImageLoader.swift */; };
-		9BEABE4721C7F56D000198F1 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEABE4621C7F56D000198F1 /* TestHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,7 +99,6 @@
 		9B57958A21C00DB000B9EF8B /* InMemoryCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryCacheTests.swift; sourceTree = "<group>"; };
 		9B57958C21C010AA00B9EF8B /* InMemoryImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryImageCache.swift; sourceTree = "<group>"; };
 		9B57958E21C010E300B9EF8B /* TestImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestImageLoader.swift; sourceTree = "<group>"; };
-		9BEABE4621C7F56D000198F1 /* TestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,7 +215,6 @@
 				9B57957821BFD0E700B9EF8B /* FileManagerHelper.swift */,
 				9B57957A21BFECD900B9EF8B /* LogHelper.swift */,
 				9B57958021BFFBBC00B9EF8B /* DownloadHelper.swift */,
-				9BEABE4621C7F56D000198F1 /* TestHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -402,7 +399,6 @@
 				9B57956121BF019900B9EF8B /* Cache.swift in Sources */,
 				9B57956321BF0C1A00B9EF8B /* FileSystemDataCache.swift in Sources */,
 				9B57958121BFFBBC00B9EF8B /* DownloadHelper.swift in Sources */,
-				9BEABE4721C7F56D000198F1 /* TestHelper.swift in Sources */,
 				9B57956E21BFBD6A00B9EF8B /* DataConvertibleCodable.swift in Sources */,
 				9B57958321BFFC3500B9EF8B /* CancelableTask.swift in Sources */,
 				9B57957F21BFF40300B9EF8B /* ImageCache.swift in Sources */,

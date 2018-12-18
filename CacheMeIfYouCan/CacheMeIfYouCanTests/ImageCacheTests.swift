@@ -91,10 +91,7 @@ class ImageCacheTests: XCTestCase {
         let expectedHomerPath = FileSystemPathHelper.path(byAppending: "homer.png", to: url.path)
         XCTAssertFalse(FileManagerHelper.fileExists(at: expectedHomerPath))
         
-        guard let cache = ImageCache(rootDirectory: .caches, subdirectoryName: "images") else {
-            XCTFail("Failed to create image cache!")
-            return
-        }
+        let cache = ImageCache(rootDirectory: .caches, subdirectoryName: "images")
         
         let homerURL = TestImageLoader.TestImage.homer.remoteURL
         // Are we starting with nothing in the cache?

@@ -184,13 +184,22 @@ class FileSystemDataCacheTests: XCTestCase {
     
     // MARK: - Tests
     
-    func testPassingEmptyStringForSubdirectoryNameReturnsNil() {
-        let rootDocsCache = UserCache(rootDirectory: .documents, subdirectoryName: "")
+    func testPassingEmptyOrNilStringForSubdirectoryNameCreatesDirectoryWithClassName() {
+        _ = UserCache(rootDirectory: .documents, subdirectoryName: "")
+        let userCacheInDocsPath = FileSystemPathHelper.UserDirectory.documents.pathToSubdirectory(named: "UserCache")
+        XCTAssertTrue(FileManagerHelper.directoryExists(at: userCacheInDocsPath))
         
-        XCTAssertNil(rootDocsCache)
+        _ = ImageCache(rootDirectory: .documents, subdirectoryName: nil)
+        let imageCacheInDocsPath = FileSystemPathHelper.UserDirectory.documents.pathToSubdirectory(named: "ImageCache")
+        XCTAssertTrue(FileManagerHelper.directoryExists(at: imageCacheInDocsPath))
         
-        let rootCachesCache = UserCache(rootDirectory: .documents, subdirectoryName: "")
-        XCTAssertNil(rootCachesCache)
+        _ = ImageCache(rootDirectory: .caches, subdirectoryName: "")
+        let imageCacheInCachesPath = FileSystemPathHelper.UserDirectory.caches.pathToSubdirectory(named: "ImageCache")
+        XCTAssertTrue(FileManagerHelper.directoryExists(at: imageCacheInCachesPath))
+        
+        _ = UserCache(rootDirectory: .caches, subdirectoryName: nil)
+        let userCacheInCachesPath = FileSystemPathHelper.UserDirectory.caches.pathToSubdirectory(named: "UserCache")
+        XCTAssertTrue(FileManagerHelper.directoryExists(at: userCacheInCachesPath))
     }
     
     func testStoringInCachesDirectory() throws {
@@ -201,10 +210,7 @@ class FileSystemDataCacheTests: XCTestCase {
         XCTAssertFalse(FileManagerHelper.directoryExists(at: url))
         XCTAssertEqual(try FileManagerHelper.contentsOfDirectory(at: url).count, 0)
         
-        guard let cache = UserCache(rootDirectory: .caches, subdirectoryName: "users") else {
-            XCTFail("Could not create cache!")
-            return
-        }
+        let cache = UserCache(rootDirectory: .caches, subdirectoryName: "users")
         
         try self.validateStoring(with: cache, expectedDirectoryURL: url)
     }
@@ -218,40 +224,25 @@ class FileSystemDataCacheTests: XCTestCase {
         XCTAssertFalse(FileManagerHelper.directoryExists(at: url))
         XCTAssertEqual(try FileManagerHelper.contentsOfDirectory(at: url).count, 0)
         
-        guard let cache = UserCache(rootDirectory: .documents, subdirectoryName: "users") else {
-            XCTFail("Could not create cache!")
-            return
-        }
+        let cache = UserCache(rootDirectory: .documents, subdirectoryName: "users")
         
         try self.validateStoring(with: cache, expectedDirectoryURL: url)
     }
     
     func testReplacingExistingStoredItemInCaches() {
-        guard let cache = UserCache(rootDirectory: .caches, subdirectoryName: "users") else {
-            XCTFail("Could not create cache!")
-            return
-        }
-        
+        let cache = UserCache(rootDirectory: .caches, subdirectoryName: "users")
         self.validateReplacingItem(cache: cache)
     }
     
     func testReplacingExistingStoredItemInDocuments() {
-        
-        guard let cache = UserCache(rootDirectory: .documents, subdirectoryName: "users") else {
-            XCTFail("Could not create cache!")
-            return
-        }
-        
+        let cache = UserCache(rootDirectory: .documents, subdirectoryName: "users")
         self.validateReplacingItem(cache: cache)
     }
     
     func testCallingBackOnNonMainQueue() {
         let queue = DispatchQueue(label: "testQueue", qos: .userInitiated, attributes: [.concurrent])
         
-        guard let cache = UserCache(rootDirectory: .documents, subdirectoryName: "users") else {
-            XCTFail("Could not create cache!")
-            return
-        }
+        let cache = UserCache(rootDirectory: .documents, subdirectoryName: "users")
         
         let storeExpectation = self.expectation(description: "Stored Expectation")
         cache.store(item: self.user1, for: self.user1URL, callbackOn: queue) {
@@ -280,10 +271,7 @@ class FileSystemDataCacheTests: XCTestCase {
     }
     
     func testCachingWithoutWaitingReturnsCachedItem() {
-        guard let cache = UserCache(rootDirectory: .documents, subdirectoryName: "users") else {
-            XCTFail("Could not create cache!")
-            return
-        }
+        let cache = UserCache(rootDirectory: .documents, subdirectoryName: "users")
         
         // Store, but don't wait for the completion to fire before trying to grab it again.
         cache.store(item: self.user1, for: self.user1URL)
@@ -293,10 +281,7 @@ class FileSystemDataCacheTests: XCTestCase {
     }
     
     func testRemovingWithoutWaitingDoesReturnCachedItem() {
-        guard let cache = UserCache(rootDirectory: .documents, subdirectoryName: "users") else {
-            XCTFail("Could not create cache!")
-            return
-        }
+        let cache = UserCache(rootDirectory: .documents, subdirectoryName: "users")
         
         self.storeUser(self.user1, for: self.user1URL, in: cache)
         guard let initialFetchedUser = self.fetchUser(for: self.user1URL, from: cache) else {
