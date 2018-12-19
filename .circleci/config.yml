@@ -1,0 +1,15 @@
+version: 2
+jobs:
+  ios:
+    macos:
+      xcode: "10.1.0"
+    steps:
+      - checkout
+      - run:
+          name: Build and test
+          command: set -o pipefail && xcodebuild clean build test -scheme "CacheMeIfYouCan" -project "CacheMeIfYouCan/CacheMeIfYouCan.xcodeproj" -destination 'platform=iOS Simulator,name=iPhone 8' | xcpretty --color && exit ${PIPESTATUS[0]}
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - ios
