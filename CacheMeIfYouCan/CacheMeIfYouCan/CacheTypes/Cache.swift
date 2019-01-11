@@ -60,8 +60,13 @@ public extension Cache {
                       callbackOn queue: DispatchQueue = .main,
                       completion: (() -> Void)? = nil) { 
         self.localQueue.async { [weak self] in
+            defer {
+                queue.async {
+                    completion?()
+                }
+            }
+            
             guard let self = self else {
-                completion?()
                 return
             }
 
@@ -69,14 +74,6 @@ public extension Cache {
                 try self.actuallyStore(item: item, for: url)
             } catch {
                 LogHelper.log("Could not store item: \(error)")
-            }
-            
-            guard let completion = completion else {
-                return
-            }
-            
-            queue.async {
-                completion()
             }
         }
     }
@@ -93,20 +90,21 @@ public extension Cache {
                           callbackOn queue: DispatchQueue = .main,
                           completion: @escaping (StoredType?) -> Void) {
         self.localQueue.async { [weak self] in
+            var item: StoredType? = nil
+            defer {
+                queue.async {
+                    completion(item)
+                }
+            }
+            
             guard let self = self else {
-                completion(nil)
                 return
             }
             
-            var item: StoredType? = nil
             do {
                 item = try self.actuallyFetchItem(for: url)
             } catch {
                 LogHelper.log("Could not fetch item: \(error)")
-            }
-            
-            queue.async {
-                completion(item)
             }
         }
     }                                   
@@ -122,8 +120,13 @@ public extension Cache {
                            callbackOn queue: DispatchQueue = .main,
                            completion: (() -> Void)? = nil) {
         self.localQueue.async { [weak self] in
+            defer {
+                queue.async {
+                    completion?()
+                }
+            }
+            
             guard let self = self else {
-                completion?()
                 return
             }
             
@@ -131,14 +134,6 @@ public extension Cache {
                 try self.actuallyRemoveItem(for: url)
             } catch {
                 LogHelper.log("Could not remove item")
-            }
-            
-            guard let completion = completion else {
-                return
-            }
-            
-            queue.async {
-                completion()
             }
         }
     }
