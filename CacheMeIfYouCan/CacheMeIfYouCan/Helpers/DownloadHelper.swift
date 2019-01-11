@@ -22,6 +22,7 @@ open class DownloadHelper {
     @discardableResult
     open class func loadData(from url: URL,
                              headers: [String: String],
+                             callbackQueue: DispatchQueue,
                              failureCompletion: @escaping (Error) -> Void,
                              successCompletion: @escaping (Data) -> Void) -> CancelableTask? {
         
@@ -30,12 +31,16 @@ open class DownloadHelper {
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
-                failureCompletion(error)
+                callbackQueue.async {
+                    failureCompletion(error)
+                }
                 return
             }
             
             guard let urlResponse = response as? HTTPURLResponse else {
-                failureCompletion(DownloadError.invalidResponseType)
+                callbackQueue.async {
+                    failureCompletion(DownloadError.invalidResponseType)
+                }
                 return
             }
             
@@ -44,22 +49,30 @@ open class DownloadHelper {
                 // Legit!
                 break
             default:
-                failureCompletion(DownloadError.invalidResponseCode(urlResponse.statusCode))
+                callbackQueue.async {
+                    failureCompletion(DownloadError.invalidResponseCode(urlResponse.statusCode))
+                }
                 return
             }
             
             guard let data = data else {
-                failureCompletion(DownloadError.noDataReturned)
+                callbackQueue.async {
+                    failureCompletion(DownloadError.noDataReturned)
+                }
                 return
             }
             
             guard !data.isEmpty else {
-                failureCompletion(DownloadError.emptyDataReturned)
+                callbackQueue.async {
+                    failureCompletion(DownloadError.emptyDataReturned)
+                }
                 return
             }
             
             // We've got data and it's not empty!
-            successCompletion(data)
+            callbackQueue.async {
+                successCompletion(data)
+            }
         }
         
         task.resume()
