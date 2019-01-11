@@ -35,7 +35,7 @@ open class FileSystemDataCache<T: DataConvertible>: Cache {
             finalSubdirectoryName = String(describing: type(of: self))
         }
 
-        print("Final subdirectory name: \(finalSubdirectoryName)")
+        LogHelper.log("Final subdirectory name: \(finalSubdirectoryName)")
         let path = rootDirectory.pathToSubdirectory(named: finalSubdirectoryName)
         
         self.directoryURL = URL(fileURLWithPath: path)
