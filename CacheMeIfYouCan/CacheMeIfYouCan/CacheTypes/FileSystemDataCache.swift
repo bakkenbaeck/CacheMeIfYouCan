@@ -133,7 +133,7 @@ open class FileSystemDataCache<T: DataConvertible>: Cache {
                     }
                     
                     // Store it before giving it back
-                    self.store(item: item, for: url, callbackOn: self.localQueue) {
+                    self.store(item: item, for: url, callbackOn: queue) {
                         successCompletion(item, url)
                     }
                 })
