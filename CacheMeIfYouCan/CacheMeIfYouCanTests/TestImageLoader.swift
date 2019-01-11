@@ -12,18 +12,18 @@ import XCTest
 class TestImageLoader {
     
     enum TestImage: String {
-        case burns
-        case homer
-        case smithers
+        case chaplin = "jerkface"
+        case georgeMichael = "georgie"
+        case bothCats = "both"
         
         var remoteURL: URL {
             switch self {
-            case .burns:
-                return URL(string: "https://raw.githubusercontent.com/bakkenbaeck/CacheMeIfYouCan/master/CacheMeIfYouCan/CacheMeIfYouCanTests/TestImages/burns.png")!
-            case .homer:
-                return URL(string: "https://raw.githubusercontent.com/bakkenbaeck/CacheMeIfYouCan/master/CacheMeIfYouCan/CacheMeIfYouCanTests/TestImages/homer.png")!
-            case .smithers:
-                return URL(string: "https://raw.githubusercontent.com/bakkenbaeck/CacheMeIfYouCan/master/CacheMeIfYouCan/CacheMeIfYouCanTests/TestImages/smithers.png")!
+            case .chaplin:
+                return URL(string: "https://raw.githubusercontent.com/bakkenbaeck/CacheMeIfYouCan/master/CacheMeIfYouCan/CacheMeIfYouCanTests/TestImages/jerkface.jpg")!
+            case .georgeMichael:
+                return URL(string: "https://raw.githubusercontent.com/bakkenbaeck/CacheMeIfYouCan/master/CacheMeIfYouCan/CacheMeIfYouCanTests/TestImages/georgie.jpg")!
+            case .bothCats:
+                return URL(string: "https://raw.githubusercontent.com/bakkenbaeck/CacheMeIfYouCan/master/CacheMeIfYouCan/CacheMeIfYouCanTests/TestImages/both.jpg")!
             }
         }
     }
@@ -40,7 +40,7 @@ class TestImageLoader {
                                file: StaticString = #file,
                                line: UInt = #line) -> UIImage? {
         guard
-            let localPath = Bundle(for: TestImageLoader.self).path(forResource: imageName, ofType: "png", inDirectory: "TestImages"),
+            let localPath = Bundle(for: TestImageLoader.self).path(forResource: imageName, ofType: "jpg", inDirectory: "TestImages"),
             let localData = try? Data(contentsOf: URL(fileURLWithPath: localPath)),
             let localImage = UIImage(data: localData) else {
                 XCTFail("Could not get local \(imageName) image!",

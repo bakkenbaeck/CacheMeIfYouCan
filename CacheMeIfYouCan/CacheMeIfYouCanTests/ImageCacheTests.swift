@@ -88,43 +88,43 @@ class ImageCacheTests: XCTestCase {
         let url = URL(fileURLWithPath: cachesImagesPath)
         
         // Are we starting without the file downloaded?
-        let expectedHomerPath = FileSystemPathHelper.path(byAppending: "homer.png", to: url.path)
-        XCTAssertFalse(FileManagerHelper.fileExists(at: expectedHomerPath))
+        let expectedChaplinPath = FileSystemPathHelper.path(byAppending: "jerkface.jpg", to: url.path)
+        XCTAssertFalse(FileManagerHelper.fileExists(at: expectedChaplinPath))
         
         let cache = ImageCache(rootDirectory: .caches, subdirectoryName: "images")
         
-        let homerURL = TestImageLoader.TestImage.homer.remoteURL
+        let chaplinURL = TestImageLoader.TestImage.chaplin.remoteURL
         // Are we starting with nothing in the cache?
-        XCTAssertNil(self.fetchFromCache(for: homerURL, using: cache))
+        XCTAssertNil(self.fetchFromCache(for: chaplinURL, using: cache))
 
-        guard let remoteHomer = self.downloadOrCache(for: homerURL, using: cache) else {
-            XCTFail("Could not get remote Homer image!")
+        guard let remoteChaplin = self.downloadOrCache(for: chaplinURL, using: cache) else {
+            XCTFail("Could not get remote Chaplin image!")
             return
         }
         
         // Is the image we downloaded identical?
-        let localHomer = TestImageLoader.localTestImage(named: "homer")
-        XCTAssertEqual(remoteHomer.pngData(), localHomer?.pngData())
+        let localChaplin = TestImageLoader.localTestImage(named: "jerkface")
+        XCTAssertEqual(remoteChaplin.pngData(), localChaplin?.pngData())
         
         // Is the image stored where we think it should be?
-        XCTAssertTrue(FileManagerHelper.fileExists(at: expectedHomerPath))
+        XCTAssertTrue(FileManagerHelper.fileExists(at: expectedChaplinPath))
         
-        guard let cachedHomer = self.fetchFromCache(for: homerURL, using: cache) else {
-            XCTFail("You are now a member of the No Homers Club.")
+        guard let cachedChaplin = self.fetchFromCache(for: chaplinURL, using: cache) else {
+            XCTFail("No Chaplin in the cache!")
             return
         }
         
         // Is the image actually the same everywhere?
-        XCTAssertEqual(cachedHomer.pngData(), remoteHomer.pngData())
-        XCTAssertEqual(cachedHomer.pngData(), localHomer?.pngData())
+        XCTAssertEqual(cachedChaplin.pngData(), remoteChaplin.pngData())
+        XCTAssertEqual(cachedChaplin.pngData(), localChaplin?.pngData())
         
-        guard let redownloadedOrCachedHomer = self.downloadOrCache(for: homerURL, using: cache) else {
-            XCTFail("Couldn't get homer on second call to download or cache!")
+        guard let redownloadedOrCachedChaplin = self.downloadOrCache(for: chaplinURL, using: cache) else {
+            XCTFail("Couldn't get Chaplin on second call to download or cache!")
             return
         }
         
-        XCTAssertEqual(redownloadedOrCachedHomer.pngData(), cachedHomer.pngData())
-        XCTAssertEqual(redownloadedOrCachedHomer.pngData(), remoteHomer.pngData())
-        XCTAssertEqual(redownloadedOrCachedHomer.pngData(), localHomer?.pngData())
+        XCTAssertEqual(redownloadedOrCachedChaplin.pngData(), cachedChaplin.pngData())
+        XCTAssertEqual(redownloadedOrCachedChaplin.pngData(), remoteChaplin.pngData())
+        XCTAssertEqual(redownloadedOrCachedChaplin.pngData(), localChaplin?.pngData())
     }
 }
