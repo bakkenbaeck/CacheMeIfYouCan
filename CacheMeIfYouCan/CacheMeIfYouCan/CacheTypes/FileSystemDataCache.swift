@@ -122,7 +122,6 @@ open class FileSystemDataCache<T: DataConvertible>: Cache {
                 successCompletion: { [weak self] data in
                     guard let item = T(data: data) else {
                         failureCompletion(DataConvertibleError.didNotConvertDataToExpectedType)
-                    
                         return
                     }
                     
