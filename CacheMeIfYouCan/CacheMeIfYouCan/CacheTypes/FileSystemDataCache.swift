@@ -35,7 +35,7 @@ open class FileSystemDataCache<T: DataConvertible>: Cache {
             finalSubdirectoryName = String(describing: type(of: self))
         }
 
-        print("Final subdirectory name: \(finalSubdirectoryName)")
+        LogHelper.log("Final subdirectory name: \(finalSubdirectoryName)")
         let path = rootDirectory.pathToSubdirectory(named: finalSubdirectoryName)
         
         self.directoryURL = URL(fileURLWithPath: path)
@@ -115,33 +115,25 @@ open class FileSystemDataCache<T: DataConvertible>: Cache {
             DownloadHelper.loadData(
                 from: url,
                 headers: downloadHeaders,
+                callbackQueue: queue,
                 failureCompletion: { error in
-                    queue.async {
-                        failureCompletion(error)
-                    }
+                    failureCompletion(error)
                 },
                 successCompletion: { [weak self] data in
                     guard let item = T(data: data) else {
-                        queue.async {
-                            failureCompletion(DataConvertibleError.didNotConvertDataToExpectedType)
-                        }
+                        failureCompletion(DataConvertibleError.didNotConvertDataToExpectedType)
                         return
                     }
                     
                     guard let self = self else {
                         // Just give back the item, don't try to store it.
-                        queue.async {
-                            successCompletion(item, url)
-                        }
-                        
+                        successCompletion(item, url)
                         return
                     }
                     
                     // Store it before giving it back
-                    self.store(item: item, for: url, callbackOn: self.localQueue) {
-                        queue.async {
-                            successCompletion(item, url)
-                        }
+                    self.store(item: item, for: url, callbackOn: queue) {
+                        successCompletion(item, url)
                     }
                 })
         }

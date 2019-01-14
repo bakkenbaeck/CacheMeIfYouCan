@@ -71,46 +71,46 @@ class InMemoryCacheTests: XCTestCase {
     
     func testCachingInMemory() throws {
         guard
-            let localHomer = TestImageLoader.localTestImage(.homer),
-            let localBurns = TestImageLoader.localTestImage(.burns),
-            let localSmithers = TestImageLoader.localTestImage(.smithers) else {
+            let localChaplin = TestImageLoader.localTestImage(.chaplin),
+            let localGeorgie = TestImageLoader.localTestImage(.georgeMichael),
+            let localBoth = TestImageLoader.localTestImage(.bothCats) else {
                 XCTFail("Could not load local test images!")
                 return
         }
         
         let cache = InMemoryImageCache()
 
-        self.storeImage(localHomer, for: TestImageLoader.TestImage.homer.remoteURL, in: cache)
-        guard let cachedHomer = self.fetchImage(for: TestImageLoader.TestImage.homer.remoteURL, in: cache) else {
-            XCTFail("Couldn't get Homer back")
+        self.storeImage(localChaplin, for: TestImageLoader.TestImage.chaplin.remoteURL, in: cache)
+        guard let cachedChaplin = self.fetchImage(for: TestImageLoader.TestImage.chaplin.remoteURL, in: cache) else {
+            XCTFail("Couldn't get Chaplin back")
             return
         }
         
-        XCTAssertEqual(cachedHomer.pngData(), localHomer.pngData())
+        XCTAssertEqual(cachedChaplin.pngData(), localChaplin.pngData())
         
-        self.storeImage(localBurns, for: TestImageLoader.TestImage.burns.remoteURL, in: cache)
-        guard let cachedBurns = self.fetchImage(for: TestImageLoader.TestImage.burns.remoteURL, in: cache) else {
-            XCTFail("Couldn't get Mr. Burns back")
+        self.storeImage(localGeorgie, for: TestImageLoader.TestImage.georgeMichael.remoteURL, in: cache)
+        guard let cachedGeorgie = self.fetchImage(for: TestImageLoader.TestImage.georgeMichael.remoteURL, in: cache) else {
+            XCTFail("Couldn't get George Michael back")
             return
         }
         
-        XCTAssertEqual(cachedBurns.pngData(), localBurns.pngData())
+        XCTAssertEqual(cachedGeorgie.pngData(), localGeorgie.pngData())
         
-        self.storeImage(localSmithers, for: TestImageLoader.TestImage.smithers.remoteURL, in: cache)
-        guard let cachedSmithers = self.fetchImage(for: TestImageLoader.TestImage.smithers.remoteURL, in: cache) else {
-            XCTFail("Couldnt get smithers back")
+        self.storeImage(localBoth, for: TestImageLoader.TestImage.bothCats.remoteURL, in: cache)
+        guard let cachedBoth = self.fetchImage(for: TestImageLoader.TestImage.bothCats.remoteURL, in: cache) else {
+            XCTFail("Couldnt get both cats back")
             return
         }
         
-        XCTAssertEqual(cachedSmithers.pngData(), localSmithers.pngData())
+        XCTAssertEqual(cachedBoth.pngData(), localBoth.pngData())
         
         // Try removing.
-        self.removeImage(for: TestImageLoader.TestImage.burns.remoteURL, in: cache)
-        XCTAssertNil(self.fetchImage(for: TestImageLoader.TestImage.burns.remoteURL, in: cache))
+        self.removeImage(for: TestImageLoader.TestImage.georgeMichael.remoteURL, in: cache)
+        XCTAssertNil(self.fetchImage(for: TestImageLoader.TestImage.georgeMichael.remoteURL, in: cache))
 
         // Try clearing all
         try cache.clearAll()
-        XCTAssertNil(self.fetchImage(for: TestImageLoader.TestImage.smithers.remoteURL, in: cache))
-        XCTAssertNil(self.fetchImage(for: TestImageLoader.TestImage.homer.remoteURL, in: cache))
+        XCTAssertNil(self.fetchImage(for: TestImageLoader.TestImage.chaplin.remoteURL, in: cache))
+        XCTAssertNil(self.fetchImage(for: TestImageLoader.TestImage.bothCats.remoteURL, in: cache))
     }
 }

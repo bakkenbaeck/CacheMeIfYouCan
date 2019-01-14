@@ -12,3 +12,6 @@ import Foundation
 public protocol CancelableTask {
     func cancel()
 }
+
+// Auto-conformance for URLSession
+extension URLSessionTask: CancelableTask { /* mix-in */ }

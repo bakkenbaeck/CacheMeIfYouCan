@@ -14,11 +14,14 @@ public enum DataConvertibleError: Error {
     case didNotConvertDataToExpectedType
 }
 
-
 /// A protocol to allow simple generic conversion to and from raw `Data` objects.
 public protocol DataConvertible {
     
+    /// Attemtps to turn the conforming type to `Data`. Returns `nil` on failure
     var toData: Data? { get }
     
+    /// Failable initializer. Fails if data cannot be turned in to the conforming type.
+    ///
+    /// - Parameter data: The data to attempt to turn into the conforming type.
     init?(data: Data)
 }
