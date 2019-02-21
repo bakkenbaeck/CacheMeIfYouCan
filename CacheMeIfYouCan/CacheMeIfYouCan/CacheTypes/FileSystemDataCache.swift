@@ -103,6 +103,13 @@ open class FileSystemDataCache<ConvertibleStoredType: DataConvertible>: Cache {
     
     // MARK: - Array Storage/Fetching
     
+    /// Stores an item using the local queue to ensure order of operations
+    ///
+    /// - Parameters:
+    ///   - items: The array of items to store
+    ///   - url: The URL to store the array for
+    ///   - queue: The queue to fire the completion closure on. Defaults to the main queue.
+    ///   - completion: [Optional] The completion closure to fire. Defaults to nil.
     open func store(items: [ConvertibleStoredType],
                     for url: URL,
                     callbackOn queue: DispatchQueue = .main,
@@ -126,11 +133,19 @@ open class FileSystemDataCache<ConvertibleStoredType: DataConvertible>: Cache {
         }
     }
     
+    /// Fetches an array of items using the local queue to ensure order of operations
+    ///
+    /// - Parameters:
+    ///   - url: The URL to search for an array for.
+    ///   - queue: The queue to fire the completion closure on. Defaults to the main queue.
+    ///   - completion: The completion closure to fire.
+    ///                 Params:
+    ///                 - [Optional] The array of stored items found at the given url, or nil.
     open func fetchItems(for url: URL,
                          callbackOn queue: DispatchQueue = .main,
-                         completion: @escaping ([StoredType]?) -> Void) {
+                         completion: @escaping ([ConvertibleStoredType]?) -> Void) {
         self.localQueue.async { [weak self] in
-            var items: [StoredType]? = nil
+            var items: [ConvertibleStoredType]? = nil
             defer {
                 queue.async {
                     completion(items)

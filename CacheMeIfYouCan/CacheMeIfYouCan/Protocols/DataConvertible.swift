@@ -26,7 +26,7 @@ public protocol DataConvertible {
     init?(data: Data)
 }
 
-extension Array where Element: DataConvertible {
+public extension Array where Element: DataConvertible {
     
     var toData: Data? {
         let datas = self.compactMap { $0.toData }
