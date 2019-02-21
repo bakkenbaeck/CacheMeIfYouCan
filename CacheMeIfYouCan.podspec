@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name             = "CacheMeIfYouCan"
   s.summary          = "Swift Generic Thread Safe Caching"
-  s.version          = "0.1"
+  s.version          = "0.2"
   s.homepage         = "https://github.com/bakkenbaeck/CacheMeIfYouCan"
   s.license          = 'MIT'
   s.author           = { "Bakken & Bæck" => "ios@bakkenbaeck.com" }
