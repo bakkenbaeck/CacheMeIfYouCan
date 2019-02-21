@@ -34,6 +34,7 @@
 		9B57958B21C00DB000B9EF8B /* InMemoryCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57958A21C00DB000B9EF8B /* InMemoryCacheTests.swift */; };
 		9B57958D21C010AA00B9EF8B /* InMemoryImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57958C21C010AA00B9EF8B /* InMemoryImageCache.swift */; };
 		9B57958F21C010E300B9EF8B /* TestImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57958E21C010E300B9EF8B /* TestImageLoader.swift */; };
+		9BB8B499221EB14200A3E331 /* DataConvertibleCodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB8B498221EB14200A3E331 /* DataConvertibleCodableTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +100,7 @@
 		9B57958A21C00DB000B9EF8B /* InMemoryCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryCacheTests.swift; sourceTree = "<group>"; };
 		9B57958C21C010AA00B9EF8B /* InMemoryImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryImageCache.swift; sourceTree = "<group>"; };
 		9B57958E21C010E300B9EF8B /* TestImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestImageLoader.swift; sourceTree = "<group>"; };
+		9BB8B498221EB14200A3E331 /* DataConvertibleCodableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataConvertibleCodableTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +169,7 @@
 				9B57958E21C010E300B9EF8B /* TestImageLoader.swift */,
 				9B57954321BF00BA00B9EF8B /* Info.plist */,
 				9B57957121BFBEEB00B9EF8B /* TestCacheTypes */,
+				9BB8B498221EB14200A3E331 /* DataConvertibleCodableTests.swift */,
 				9B57957621BFCE0900B9EF8B /* FileSystemDataCacheTests.swift */,
 				9B57958821C005D200B9EF8B /* ImageCacheTests.swift */,
 				9B57958A21C00DB000B9EF8B /* InMemoryCacheTests.swift */,
@@ -382,6 +385,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BB8B499221EB14200A3E331 /* DataConvertibleCodableTests.swift in Sources */,
 				9B57958F21C010E300B9EF8B /* TestImageLoader.swift in Sources */,
 				9B57958D21C010AA00B9EF8B /* InMemoryImageCache.swift in Sources */,
 				9B57957321BFBEFD00B9EF8B /* UserCache.swift in Sources */,

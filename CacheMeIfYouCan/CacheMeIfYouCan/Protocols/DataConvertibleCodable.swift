@@ -34,3 +34,16 @@ public extension DataConvertibleCodable {
         self = decoded
     }
 }
+
+// MARK: - Arrays of codables
+
+public extension Array where Element: DataConvertibleCodable {
+    
+    var toData: Data?  {
+        return try? Element.encoder.encode(self)
+    }
+    
+    static func fromData(_ data: Data) -> [Element]? {
+        return try? Element.decoder.decode([Element].self, from: data)
+    }
+}
