@@ -71,6 +71,5 @@ class DataConvertibleCodableTests: XCTestCase {
         
         XCTAssertEqual(users, self.userArray)
     }
-    
 }
 

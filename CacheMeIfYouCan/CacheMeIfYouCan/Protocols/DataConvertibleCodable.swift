@@ -32,7 +32,7 @@ public extension DataConvertibleCodable {
         }
         
         self = decoded
-    }
+    }    
 }
 
 // MARK: - Arrays of codables

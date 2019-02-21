@@ -25,3 +25,64 @@ public protocol DataConvertible {
     /// - Parameter data: The data to attempt to turn into the conforming type.
     init?(data: Data)
 }
+
+extension Array where Element: DataConvertible {
+    
+    var toData: Data? {
+        let datas = self.compactMap { $0.toData }
+        if datas.isEmpty {
+            return nil
+        }
+        
+        return Data.mashTogether(array: datas)
+    }
+    
+    static func fromData(_ data: Data) -> [Element]? {
+        let datas = data.unmash
+        if datas.isEmpty {
+            return nil
+        }
+        
+        return datas.compactMap { Element(data: $0) }
+    }
+}
+
+extension Data {
+    
+    private static var separatorData: Data {
+        return "====== CACHE ME IF YOU CAN SEPARATOR =====".data(using: .utf8)!
+    }
+    
+    static func mashTogether(array: [Data]) -> Data {
+        var data = Data()
+        for (index, item) in array.enumerated() {
+            data.append(item)
+            if index != (array.count - 1) {
+                data.append(Data.separatorData)
+            }
+        }
+        
+        return data
+    }
+    
+    /// Ganked from: https://stackoverflow.com/a/50476676/681493
+    var unmash: [Data] {
+        var chunks = [Data]()
+        var currentPosition = self.startIndex
+        // Find next occurrence of separator after current position:
+        while let range = self[currentPosition...].range(of: Data.separatorData) {
+            // Append if non-empty:
+            if range.lowerBound > currentPosition {
+                chunks.append(self[currentPosition..<range.lowerBound])
+            }
+            // Update current position:
+            currentPosition = range.upperBound
+        }
+        // Append final chunk, if non-empty:
+        if currentPosition < self.endIndex {
+            chunks.append(self[currentPosition..<endIndex])
+        }
+        
+        return chunks
+    }
+}
