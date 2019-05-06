@@ -109,7 +109,6 @@ public extension Cache {
         }
     }                                   
     
-    
     /// Fetches an item using the local queue to ensure order of operations
     ///
     /// - Parameters:
