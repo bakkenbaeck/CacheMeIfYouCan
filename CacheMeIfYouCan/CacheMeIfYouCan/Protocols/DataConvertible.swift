@@ -34,11 +34,24 @@ public extension Array where Element: DataConvertible {
             return nil
         }
         
-        return Data.mashTogether(array: datas)
+        do {
+            return try Data.mashTogether(array: datas)
+        } catch {
+            debugPrint("CacheMeIfYouCan: Error mashing data together: \(error)")
+            return nil
+        }
     }
     
     static func fromData(_ data: Data) -> [Element]? {
-        let datas = data.unmash
+        let datas: [Data]
+            
+        do {
+            datas = try data.unmash()
+        } catch {
+            debugPrint("CacheMeIfYouCan: Error unmashing data: \(error)")
+            return nil
+        }
+        
         if datas.isEmpty {
             return nil
         }
@@ -49,40 +62,17 @@ public extension Array where Element: DataConvertible {
 
 extension Data {
     
-    private static var separatorData: Data {
-        return "====== CACHE ME IF YOU CAN SEPARATOR =====".data(using: .utf8)!
+    static func mashTogether(array: [Data]) throws -> Data {
+        let base64EncodedStrings = array.map { $0.base64EncodedString() }
+        let encoder = JSONEncoder()
+        
+        return try encoder.encode(base64EncodedStrings)
     }
     
-    static func mashTogether(array: [Data]) -> Data {
-        var data = Data()
-        for (index, item) in array.enumerated() {
-            data.append(item)
-            if index != (array.count - 1) {
-                data.append(Data.separatorData)
-            }
-        }
-        
-        return data
-    }
-    
-    /// Ganked from: https://stackoverflow.com/a/50476676/681493
-    var unmash: [Data] {
-        var chunks = [Data]()
-        var currentPosition = self.startIndex
-        // Find next occurrence of separator after current position:
-        while let range = self[currentPosition...].range(of: Data.separatorData) {
-            // Append if non-empty:
-            if range.lowerBound > currentPosition {
-                chunks.append(self[currentPosition..<range.lowerBound])
-            }
-            // Update current position:
-            currentPosition = range.upperBound
-        }
-        // Append final chunk, if non-empty:
-        if currentPosition < self.endIndex {
-            chunks.append(self[currentPosition..<endIndex])
-        }
-        
-        return chunks
+    func unmash() throws -> [Data] {
+        let decoder = JSONDecoder()
+        let base64Strings = try decoder.decode([String].self, from: self)
+        let decodedData = base64Strings.compactMap { Data(base64Encoded: $0) }
+        return decodedData
     }
 }
