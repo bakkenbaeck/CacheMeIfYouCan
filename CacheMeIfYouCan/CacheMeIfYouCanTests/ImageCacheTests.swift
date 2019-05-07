@@ -127,4 +127,46 @@ class ImageCacheTests: XCTestCase {
         XCTAssertEqual(redownloadedOrCachedChaplin.pngData(), remoteChaplin.pngData())
         XCTAssertEqual(redownloadedOrCachedChaplin.pngData(), localChaplin?.pngData())
     }
+    
+    func testCachingImageArray() {
+        let cache = ImageCache(rootDirectory: .caches, subdirectoryName: "images")
+        let localChaplin = TestImageLoader.localTestImage(.chaplin)!
+        let localGeorgie = TestImageLoader.localTestImage(.georgeMichael)!
+        let testURL = TestImageLoader.TestImage.chaplin.remoteURL
+        let imageArray = [localChaplin, localGeorgie]
+
+        let storageExpectation = self.expectation(description: "Images stored")
+        cache.store(items: imageArray, for: testURL) {
+            storageExpectation.fulfill()
+        }
+        
+        self.wait(for: [storageExpectation], timeout: 1)
+        
+        let retrievalExpectation = self.expectation(description: "Images retrieved")
+        cache.fetchItems(for: testURL) { images in
+            defer {
+                retrievalExpectation.fulfill()
+            }
+            
+            guard let images = images else {
+                XCTFail("Images were nil")
+                return
+            }
+            
+            guard images.count == imageArray.count else {
+                XCTFail("Not equal number of images - expected \(imageArray.count), got \(images.count)")
+                return
+            }
+            
+            for (index, image) in images.enumerated() {
+                let expectedImage = imageArray[index]
+                XCTAssertEqual(image.pngData(),
+                               expectedImage.pngData(),
+                               "Mismatched data at index \(index)")
+            }
+        }
+        
+        self.wait(for: [retrievalExpectation], timeout: 1)
+    }
+    
 }

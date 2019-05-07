@@ -25,3 +25,54 @@ public protocol DataConvertible {
     /// - Parameter data: The data to attempt to turn into the conforming type.
     init?(data: Data)
 }
+
+public extension Array where Element: DataConvertible {
+    
+    var toData: Data? {
+        let datas = self.compactMap { $0.toData }
+        if datas.isEmpty {
+            return nil
+        }
+        
+        do {
+            return try Data.mashTogether(array: datas)
+        } catch {
+            debugPrint("CacheMeIfYouCan: Error mashing data together: \(error)")
+            return nil
+        }
+    }
+    
+    static func fromData(_ data: Data) -> [Element]? {
+        let datas: [Data]
+            
+        do {
+            datas = try data.unmash()
+        } catch {
+            debugPrint("CacheMeIfYouCan: Error unmashing data: \(error)")
+            return nil
+        }
+        
+        if datas.isEmpty {
+            return nil
+        }
+        
+        return datas.compactMap { Element(data: $0) }
+    }
+}
+
+extension Data {
+    
+    static func mashTogether(array: [Data]) throws -> Data {
+        let base64EncodedStrings = array.map { $0.base64EncodedString() }
+        let encoder = JSONEncoder()
+        
+        return try encoder.encode(base64EncodedStrings)
+    }
+    
+    func unmash() throws -> [Data] {
+        let decoder = JSONDecoder()
+        let base64Strings = try decoder.decode([String].self, from: self)
+        let decodedData = base64Strings.compactMap { Data(base64Encoded: $0) }
+        return decodedData
+    }
+}

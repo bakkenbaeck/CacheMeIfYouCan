@@ -41,7 +41,7 @@ public protocol Cache: class {
 
 public extension Cache {
     
-    public static var defaultQueue: DispatchQueue {
+    static var defaultQueue: DispatchQueue {
         return DispatchQueue(
             label: String(describing: Self.self),
             qos: .userInitiated,
@@ -55,7 +55,7 @@ public extension Cache {
     ///   - url: The URL to store it for
     ///   - queue: The queue to fire the completion closure on. Defaults to the main queue.
     ///   - completion: [Optional] The completion closure to fire. Defaults to nil.
-    public func store(item: StoredType,
+    func store(item: StoredType,
                       for url: URL,
                       callbackOn queue: DispatchQueue = .main,
                       completion: (() -> Void)? = nil) { 
@@ -86,7 +86,7 @@ public extension Cache {
     ///   - completion: The completion closure to fire.
     ///                 Params:
     ///                 - [Optional] The stored item found at the given url, or nil.
-    public func fetchItem(for url: URL,
+    func fetchItem(for url: URL,
                           callbackOn queue: DispatchQueue = .main,
                           completion: @escaping (StoredType?) -> Void) {
         self.localQueue.async { [weak self] in
@@ -109,14 +109,13 @@ public extension Cache {
         }
     }                                   
     
-    
     /// Fetches an item using the local queue to ensure order of operations
     ///
     /// - Parameters:
     ///   - url: The URL to remove any stored item for.
     ///   - queue: The queue to fire the completion closure on. Defaults to the main queue.
     ///   - completion: [Optional] The completion closure to fire. Defaults to nil.
-    public func removeItem(for url: URL,
+    func removeItem(for url: URL,
                            callbackOn queue: DispatchQueue = .main,
                            completion: (() -> Void)? = nil) {
         self.localQueue.async { [weak self] in

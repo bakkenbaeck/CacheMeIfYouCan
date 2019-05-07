@@ -34,6 +34,7 @@
 		9B57958B21C00DB000B9EF8B /* InMemoryCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57958A21C00DB000B9EF8B /* InMemoryCacheTests.swift */; };
 		9B57958D21C010AA00B9EF8B /* InMemoryImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57958C21C010AA00B9EF8B /* InMemoryImageCache.swift */; };
 		9B57958F21C010E300B9EF8B /* TestImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B57958E21C010E300B9EF8B /* TestImageLoader.swift */; };
+		9BB8B499221EB14200A3E331 /* DataConvertibleCodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB8B498221EB14200A3E331 /* DataConvertibleCodableTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +100,7 @@
 		9B57958A21C00DB000B9EF8B /* InMemoryCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryCacheTests.swift; sourceTree = "<group>"; };
 		9B57958C21C010AA00B9EF8B /* InMemoryImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryImageCache.swift; sourceTree = "<group>"; };
 		9B57958E21C010E300B9EF8B /* TestImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestImageLoader.swift; sourceTree = "<group>"; };
+		9BB8B498221EB14200A3E331 /* DataConvertibleCodableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataConvertibleCodableTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +169,7 @@
 				9B57958E21C010E300B9EF8B /* TestImageLoader.swift */,
 				9B57954321BF00BA00B9EF8B /* Info.plist */,
 				9B57957121BFBEEB00B9EF8B /* TestCacheTypes */,
+				9BB8B498221EB14200A3E331 /* DataConvertibleCodableTests.swift */,
 				9B57957621BFCE0900B9EF8B /* FileSystemDataCacheTests.swift */,
 				9B57958821C005D200B9EF8B /* ImageCacheTests.swift */,
 				9B57958A21C00DB000B9EF8B /* InMemoryCacheTests.swift */,
@@ -309,14 +312,16 @@
 				TargetAttributes = {
 					9B57952821BF00B900B9EF8B = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 					};
 					9B57953C21BF00BA00B9EF8B = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 						TestTargetID = 9B57952821BF00B900B9EF8B;
 					};
 					9B57955021BF015900B9EF8B = {
 						CreatedOnToolsVersion = 10.1;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -382,6 +387,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BB8B499221EB14200A3E331 /* DataConvertibleCodableTests.swift in Sources */,
 				9B57958F21C010E300B9EF8B /* TestImageLoader.swift in Sources */,
 				9B57958D21C010AA00B9EF8B /* InMemoryImageCache.swift in Sources */,
 				9B57957321BFBEFD00B9EF8B /* UserCache.swift in Sources */,
@@ -574,7 +580,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = no.bakkenbaeck.DemoApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -592,7 +598,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = no.bakkenbaeck.DemoApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -611,7 +617,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = no.bakkenbaeck.CacheMeIfYouCanTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DemoApp.app/DemoApp";
 			};
@@ -631,7 +637,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = no.bakkenbaeck.CacheMeIfYouCanTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DemoApp.app/DemoApp";
 			};
@@ -660,7 +666,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -689,7 +695,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = no.bakkenbaeck.CacheMeIfYouCan;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
